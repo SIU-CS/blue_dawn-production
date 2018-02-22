@@ -10,7 +10,7 @@ It primarily includes:
   - Improved ease of use
 
 Team:
-  - Nathan Jean   nathan.jean@siu.edu
-  - Paul Coen     paul.coen@siu.edu
   - Adam Barron   adambarron97@siu.edu
+  - Paul Coen     paul.coen@siu.edu
+  - Nathan Jean   nathan.jean@siu.edu
   - Michael Smith michael.r.smith@siu.edu
