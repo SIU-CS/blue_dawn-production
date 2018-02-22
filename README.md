@@ -13,3 +13,4 @@ Team:
   - Nathan Jean   nathan.jean@siu.edu
   - Paul Coen     paul.coen@siu.edu
   - Adam Barron   adambarron97@siu.edu
+  - Michael Smith michael.r.smith@siu.edu
