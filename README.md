@@ -11,3 +11,4 @@ It primarily includes:
     
 Team:
     Nathan Jean  nathan.jean@siu.edu
+    Paul Coen    paul.coen@siu.edu
