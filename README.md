@@ -14,3 +14,4 @@ Team:
   - Paul Coen     paul.coen@siu.edu
   - Nathan Jean   nathan.jean@siu.edu
   - Michael Smith michael.r.smith@siu.edu
+  - Ahmed Almutairi Ahmed.almutairi@siu.edu
