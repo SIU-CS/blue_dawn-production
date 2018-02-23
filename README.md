@@ -10,9 +10,9 @@ It primarily includes:
   - Improved ease of use
 
 Team:
-  - Adam Barron   adambarron97@siu.edu
+  - Adam Barron     adambarron97@siu.edu
   - Ahmed Almutairi Ahmed.almutairi@siu.edu
-  - Paul Coen     paul.coen@siu.edu
-  - Nathan Jean   nathan.jean@siu.edu
-  - Michael Smith michael.r.smith@siu.edu
+  - Paul Coen       paul.coen@siu.edu
+  - Nathan Jean     nathan.jean@siu.edu
+  - Michael Smith   michael.r.smith@siu.edu
   
