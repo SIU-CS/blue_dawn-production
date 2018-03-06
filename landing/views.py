@@ -14,6 +14,5 @@ class ImportData(CreateView):
 	 #template_name = 'import.html'
 	#return render(request,'import.html')
 
-	#def get_queryset(self):
-	#	return 
+	
 
