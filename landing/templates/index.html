@@ -6,6 +6,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width,initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel ="stylesheet" href="landing/templates/style.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         
@@ -62,7 +63,7 @@
                             <li><a href="#">Wiki</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="#"><span class="glyphicon glyphicon-log-in"> Login</span></a></li>
+                            <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"> Login</span></a></li>
                         </ul>
                     </div>
                 </div>
