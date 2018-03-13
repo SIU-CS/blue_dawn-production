@@ -19,3 +19,6 @@ def login(request):
 	
 def userprofile(request):
 	return render(request,'user_page_index.html')
+
+def viewdata(request):
+	return render(request,'view_data_page_index.html')
