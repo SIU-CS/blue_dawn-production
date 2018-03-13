@@ -17,5 +17,5 @@ class ImportData(CreateView):
 def login(request):
 	return render(request,'login_page_index.html')
 	
-	
-
+def userprofile(request):
+	return render(request,'user_page_index.html')

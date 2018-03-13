@@ -34,7 +34,7 @@
                 width:auto;
                 padding 12px 20px;
                 margin 8px 0;
-                display inline-block;
+                display: inline-block;
                 border: 1px solid #ccc;
                 box-sizing: border-box;
 		}
@@ -121,7 +121,7 @@
                 <div class="collapse navbar-collapse" id="myNavbar">
                         <ul class="nav navbar-nav">
                             <li><a href="{% url 'index' %}">Home</a></li>
-                            <li><a href="#">User Page</a></li>
+                            <li><a href="{% url 'user-profile' %}">User Page</a></li>
                             <li><a href="#">Coding</a></li>
                             <li><a href="#">Wiki</a></li>
                         </ul>
@@ -174,7 +174,7 @@
         </div>
     
     <footer class="container-fluid text-center">
-  <p>Footer Text</p>
+  <p>Footer</p>
 </footer>
     
 </body>
