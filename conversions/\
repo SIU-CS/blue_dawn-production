@@ -1,0 +1,28 @@
+import csv
+import untangle
+import dicttoxml
+
+def csv2xml(csv_file):
+    csv_data = csv.reader(csv_file)
+
+    for row in csv_data:
+        print(row)
+
+    xml = '<?xml version="1.0"?>\n'
+    pass
+
+def xlsx2xml(xlsx_file):
+    pass
+
+def xml2csv(xml):
+    pass
+
+def xml2xlsx(xml):
+    pass
+
+if __name__ == "__main__":
+    print("Hello world!")
+    csv_file = open("/home/michael/file.csv")
+    csv2xml(csv_file)
+    
+
