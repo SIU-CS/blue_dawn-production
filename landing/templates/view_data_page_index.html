@@ -22,7 +22,7 @@
             .sidenav{
                 padding-top: 20px;
                 background-color: #f1f1f1;
-                height:100%
+                height:100%;
             }
             footer{
                 background-color: #555;
@@ -30,10 +30,24 @@
                 padding:15px;
                 
             }
+            table{
+                border-collapse: collapse;
+                border-spacing: 0;
+                width: 100%;
+                border: 1px solid #ddd
+                
+            }
+            td,th{
+                text-align: left;
+                padding: 16px;
+            }
+            tr:nth-child(even){
+                background-color: #f2f2f2; 
+            }
             
             @media screen and (max-width:767px){
                 .sidenav{
-                    height:auto;
+                    height:100%;
                     padding: 15px;
                 }
                 .row.content{
@@ -78,15 +92,21 @@
                 <div class="col-sm-8 text-left">
                     <h2> View Data</h2>
                     <hr>
-                    <p></p>
+                    <p> This is an example of what the tables on this page might end up looking like.</p>
+                    <button onclick="populateTable()"> Populate Test</button>
+                    <table id="data_table">
+                        <tr>
+                            <th>Tag Name</th>
+                            <th>Number of Assignments</th>
+                        </tr>
+                       
+                    </table>
                 </div>
                 <div class="col-sm-2 sidenav">
                   <div class="well">
-                      <a href ="{% url 'data-import' %}"><p><span class="glyphicon glyphicon-open-file"></span> Import Data</p></a>
+                      <a href ="{% url 'data-import' %}"><p><span class="glyphicon glyphicon-open-file"></span> Import New Data</p></a>
                   </div>
-                  <div class="well">
-                    <a><p><span class="glyphicon glyphicon-folder-open"></span> View Data</p></a>
-                  </div>
+                 
                 </div>
             </div>
         
@@ -95,7 +115,22 @@
     <footer class="container-fluid text-center">
   <p>Footer</p>
 </footer>
-    
+ <script>
+//Script to populate the data table
+   function populateTable(){
+       var table = document.getElementById("data_table");
+       
+       for(var i = 1;i <= 15; i++){
+       var row = table.insertRow(i);
+       var c1 = row.insertCell(0);
+       var c2 = row.insertCell(1);
+       c1.innerHTML = "Tag"+i;
+       c2.innerHTML = ""+i;      
+       }
+   }     
+        
+     
+</script>   
     
 </body>
 </html>
