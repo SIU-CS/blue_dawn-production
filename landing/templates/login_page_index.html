@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Blue Dawn Analysis</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	   <link rel ="stylesheet" href="landing/templates/style.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        
+        <style>
+            .navbar{
+                margin-bottom: : 0;
+                border-radius: 0;
+               
+            }
+            .row.content{
+                height:450px;
+            }
+            .sidenav{
+                padding-top: 20px;
+                background-color: #f1f1f1;
+                height:100%
+            }
+            footer{
+                background-color: #555;
+                color: white;
+                padding:15px;
+                
+            }
+            
+            input[type=text],input[type=password]{
+                width:auto;
+                padding 12px 20px;
+                margin 8px 0;
+                display: inline-block;
+                border: 1px solid #ccc;
+                box-sizing: border-box;
+		}
+            button{
+                background-color: #4CAF50;
+                color: white;
+                padding: 14px 20px;
+                margin: 8px 0;
+                border: none;
+                cursor: pointer;
+                width: auto;
+            }
+            
+            .container {
+                padding: 16px;
+                width: auto;
+            }
+      
+           span.psw {
+            float: none;
+            padding-top: 16px;
+            
+        }
+            .modal {
+                position: fixed; /* Stay in place */
+                z-index: 1; /* Sit on top */
+                left: 0;
+                top: 0;
+                width: auto; 
+                height: auto; 
+                overflow: auto; 
+                background-color: rgb(0,0,0); 
+                background-color: rgba(0,0,0,0.4); 
+                padding-top: 60px;
+            }
+            .modal-content {
+                background-color: #fefefe;
+                margin: 5% auto 15% auto; 
+                border: 1px solid #888;
+                width: auto; 
+            }
+            .close {
+                position: absolute;
+                right: 25px;
+                top: 0;
+                color: #000;
+                font-size: 35px;
+                font-weight: bold;
+            }
+
+            .close:hover,
+            .close:focus {
+                color: red;
+                cursor: pointer;
+            }
+       @media screen and (max-width:767px){
+                .sidenav{
+                    height:auto;
+                    padding: 15px;
+                }
+                .row.content{
+                    height:auto;
+                }
+                span.psw {
+                   display: block;
+                   float: none;
+                }
+            }
+        
+        </style>
+        
+    </head>
+    <body>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">BDA</a>
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                        <ul class="nav navbar-nav">
+                            <li><a href="{% url 'index' %}">Home</a></li>
+                            <li><a href="{% url 'user-profile' %}">User Page</a></li>
+                            <li><a href="#">Wiki</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"> Login</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+        </nav>
+        
+        <div class="container-fluid text-center">
+            <div class="row content">
+                <div class="col-sm-2 sidenav">
+              
+                </div>
+                <div class="col-sm-8 text-center">
+                    <h2>Login</h2>
+                    
+         
+ 		         <div class="well">
+                    <div class="container">
+                      <label for="uname"><b>Username/Email</b></label>
+                        <p></p>
+                      <input type="text" placeholder="Enter Username" name="uname" required>
+                        <hr>
+
+                      <label for="psw"><b>Password</b></label>
+                        <p></p>
+                      <input type="password" placeholder="Enter Password" name="psw" required>
+                        <hr>
+
+                        <a href="{% url 'user-profile' %}"><button type="submit">Login</button></a>
+                      <label>
+                        <input type="checkbox" checked="checked" name="remember"> Remember me
+                      </label>
+                    </div>
+
+                    <div class="container text-center" style="background-color:#f1f1f1">
+                      <span class="psw">Forgot <a href="#">password?</a></span>
+                    </div>
+
+                    </div>
+
+                </div>
+                <div class="col-sm-2 sidenav">
+                 
+                </div>
+            </div>
+        
+        </div>
+    
+    <footer class="container-fluid text-center">
+  <p>Footer</p>
+</footer>
+    
+</body>
+</html>

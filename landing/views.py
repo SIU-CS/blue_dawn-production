@@ -14,5 +14,11 @@ class ImportData(CreateView):
 	 #template_name = 'import.html'
 	#return render(request,'import.html')
 
+def login(request):
+	return render(request,'login_page_index.html')
 	
+def userprofile(request):
+	return render(request,'user_page_index.html')
 
+def viewdata(request):
+	return render(request,'view_data_page_index.html')

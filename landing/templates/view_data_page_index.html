@@ -72,16 +72,21 @@
         <div class="container-fluid text-center">
             <div class="row content">
                 <div class="col-sm-2 sidenav">
-                <p></p>
-                <p></p>
+                    <p></p>
+                    <p></p>
                 </div>
                 <div class="col-sm-8 text-left">
-                    <h2>Welcome to Blue Dawn Analysis</h2>
-                    <p></p>
+                    <h2> View Data</h2>
                     <hr>
-		            <a class="btn btn-default" href="{% url 'data-import' %}" role="button"> Import DataSet </a>
+                    <p></p>
                 </div>
                 <div class="col-sm-2 sidenav">
+                  <div class="well">
+                      <a href ="{% url 'data-import' %}"><p><span class="glyphicon glyphicon-open-file"></span> Import Data</p></a>
+                  </div>
+                  <div class="well">
+                    <a><p><span class="glyphicon glyphicon-folder-open"></span> View Data</p></a>
+                  </div>
                 </div>
             </div>
         
@@ -94,22 +99,3 @@
     
 </body>
 </html>
-
-
-
-<!--
-<!DOCTYPE HTML>
-<html lang="en">
-    <head>
-        <title>Blue Dawn Analysis</title>
-    </head>
-    <body>
-        <p>Main Landing Page</p>   
-        
-        		<a class="btn btn-default" href="{% url 'data-import' %}" role="button"> Import DataSet </a>
-         
-    </body>
-</html>
-
--->
-
