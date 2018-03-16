@@ -25,10 +25,12 @@ from django.conf.urls import url
 urlpatterns = [
     path('', views.index, name='index'),
     path('admin/', admin.site.urls),
-    url(r'data/import', views.ImportData.as_view(), name='data-import'),
+    #url(r'data/import', views.ImportData.as_view(), name='data-import'),
     url(r'login', views.login, name='login'),
     url(r'profile', views.userprofile, name='user-profile'),
     url(r'data/view', views.viewdata, name='view-data'),
+    url(r'importing', views.importing, name='importing'),
+
 
 ]
 
