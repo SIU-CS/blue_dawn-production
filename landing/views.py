@@ -7,11 +7,10 @@ from .models import DataFile
 def index(request):
     return render(request,'index.html')
 
-
 class ImportData(CreateView):
 	model = DataFile
 	fields = ['title', 'description', 'file']
-	 #template_name = 'import.html'
+    #template_name = 'import.html'
 	#return render(request,'import.html')
 
 def login(request):
