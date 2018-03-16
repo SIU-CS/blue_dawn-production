@@ -21,12 +21,10 @@ def index(request):
 
     return render(request,'index.html')
 
-
 class ImportData(CreateView):
-#	model = DataFile
+  #model = DataFile
 	fields = ['title', 'description', 'file']
-        
-	 #template_name = 'import.html'
+  #template_name = 'import.html'
 	#return render(request,'import.html')
 
 def login(request):
@@ -37,3 +35,6 @@ def userprofile(request):
 
 def viewdata(request):
 	return render(request,'view_data_page_index.html')
+
+def assigntag(request):
+	return render(request,'assign_tag_page_index.html')
