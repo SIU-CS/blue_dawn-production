@@ -4,7 +4,7 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    url(r'data/import', views.ImportData.as_view(), name='data-import'),
+    url(r'data/import', views.dataimport, name='dataimport'),
     url(r'login', views.login, name='login'),
 ]
 
