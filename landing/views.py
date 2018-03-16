@@ -2,15 +2,19 @@ from django.shortcuts import render
 from django.views import generic
 from django.template import RequestContext
 from django.views.generic.edit import CreateView
-from .models import DataFile
+#from .models import DataFile
+from landing.JSONDataSet import JSONDataSet
+from landing.JSONDataSet import FileType
+
+from pprint import pprint
 
 def index(request):
     return render(request,'index.html')
 
 class ImportData(CreateView):
-	model = DataFile
+  #model = DataFile
 	fields = ['title', 'description', 'file']
-    #template_name = 'import.html'
+  #template_name = 'import.html'
 	#return render(request,'import.html')
 
 def login(request):
