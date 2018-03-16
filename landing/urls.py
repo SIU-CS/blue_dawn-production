@@ -6,5 +6,6 @@ urlpatterns = [
     path('', views.index, name='index'),
     url(r'data/import', views.ImportData.as_view(), name='data-import'),
     url(r'login', views.login, name='login'),
+    url(r'importing', views.importing.as_view(), name='importing'),
 ]
 
