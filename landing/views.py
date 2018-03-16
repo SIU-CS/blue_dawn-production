@@ -22,3 +22,6 @@ def userprofile(request):
 
 def viewdata(request):
 	return render(request,'view_data_page_index.html')
+
+def assigntag(request):
+	return render(request,'assign_tag_page_index.html')
