@@ -11,7 +11,7 @@ class FileType(Enum):
     JSON=2
 
 class JSONDataSet:
-    def __init__(self, filepath, filetype):
+    def __init__(self, filepath, filetype, name, description):
         if filetype == FileType.CSV:
             with open(filepath, newline='') as csv_file:
                 csv_data = csv.reader(csv_file)
@@ -19,8 +19,8 @@ class JSONDataSet:
                 json_dict["tags"] = list()
                 json_dict["data"] = list()
 
-                json_dict["title"] = csv_data.__next__()
-                json_dict["description"] = csv_data.__next__()
+                json_dict["title"] = name
+                json_dict["description"] = description
 
                 for row in csv_data:
                     data_item = dict()
@@ -35,24 +35,22 @@ class JSONDataSet:
             json_dict = dict()
             json_dict["tags"] = list()
             json_dict["data"] = list()
-
+            
+            json_dict["title"] = name
+            json_dict["description"] = description
+            
             i = 0
             for elem in xlxs_data['A']:
-                if i == 0:
-                    json_dict["title"] = elem.value
-                elif i == 1:
-                    json_dict["description"] = elem.value
-                else:
-                    data_item = dict()
-                    data_item["question"] = elem.value
-                    data_item["tag"] = str()
-                    json_dict["data"].append(data_item)
+                data_item = dict()
+                data_item["question"] = elem.value
+                data_item["tag"] = str()
+                json_dict["data"].append(data_item)
                 i += 1
 
             self.json_dict = json_dict
 
         elif filetype == FileType.JSON:
-            # lol
+            # lol why u do this?
             self.json_dict = json.loads(json.loads(filepath['data']))
 
     # write this dataset to the database

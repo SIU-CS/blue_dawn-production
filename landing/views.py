@@ -44,7 +44,10 @@ def importing(request):
 
             filepath = saveUploadedFile(f) # save file to disk temporarily
 
-            data = JSONDataSet(filepath, filetype)
+            name = request.POST.get("name", "")
+            description = request.POST.get("description", "")
+            
+            data = JSONDataSet(filepath, filetype, name, description)
             data.SaveDataset(request.user) # save dataset to database as json
 
             os.remove(filepath) # delete the temporary file
