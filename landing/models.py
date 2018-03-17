@@ -8,5 +8,3 @@ class DataSet(models.Model):
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
 	data = JSONField() 
 
-def __str__(self):
-	return self.file
