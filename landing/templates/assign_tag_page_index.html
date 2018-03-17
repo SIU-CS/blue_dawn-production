@@ -5,9 +5,12 @@
         <title>Blue Dawn Analysis</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width,initial-scale=1">
+        
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	    <link rel ="stylesheet" href="{% static 'css/style.css' %}">
+        
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
     <body>
@@ -20,21 +23,24 @@
                     <p></p>
                 </div>
                 <div class="col-sm-8 text-left">
-                    <h2> View Data</h2>
+                    <h2>Assign Tags</h2>
                     <hr>
                     <p> This is an example of what the tables on this page might end up looking like.</p>
                     <button onclick="populateTable()"> Populate Test</button>
                     <table id="data_table">
                         <tr>
-                            <th>Tag Name</th>
-                            <th>Number of Assignments</th>
+                            <th>Question</th>
+                            <th>Answer</th>
+                            <th>Tags</th>
+                        </tr>
+                        <tr>
+                        
                         </tr>
                        
                     </table>
                 </div>
                 <div class="col-sm-2 sidenav">
                   <div class="well">
-                      <a href ="{% url 'data-import' %}"><p><span class="glyphicon glyphicon-open-file"></span> Import New Data</p></a>
                   </div>
                  
                 </div>
@@ -54,8 +60,10 @@
        var row = table.insertRow(i);
        var c1 = row.insertCell(0);
        var c2 = row.insertCell(1);
-       c1.innerHTML = "Tag"+i;
-       c2.innerHTML = ""+i;      
+       var c3 = row.insertCell(2);
+       c1.innerHTML = "Question "+i;
+       c2.innerHTML = "Answer "+i; 
+       c3.innerHTML = "Dropdown Tag List"
        }
    }     
         
