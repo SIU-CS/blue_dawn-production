@@ -3,7 +3,6 @@ import openpyxl
 import json
 from enum import Enum
 from landing.models import DataSet
-
 from pprint import pprint
 
 class FileType(Enum):
@@ -13,6 +12,7 @@ class FileType(Enum):
 
 class JSONDataSet:
     def __init__(self, filepath, filetype):
+        print(filepath)
         if filetype == FileType.CSV:
             with open(filepath, newline='') as csv_file:
                 csv_data = csv.reader(csv_file)
