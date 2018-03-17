@@ -5,9 +5,6 @@ from django.contrib.auth.models import User
 from jsonfield import JSONField
 
 class DataSet(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    data = JSONField() 
-
-
-
+	user = models.ForeignKey(User, on_delete=models.CASCADE)
+	data = JSONField() 
 
