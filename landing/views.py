@@ -26,6 +26,9 @@ def viewdata(request):
 def assigntag(request):
 	return render(request,'assign_tag_page_index.html')
 
+def wikimain(request):
+    return render(request,'wiki-main.html')
+  
 def importing(request):
     form = FileForm(request.POST or None)
     if request.method == 'POST':

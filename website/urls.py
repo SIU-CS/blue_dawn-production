@@ -30,7 +30,7 @@ urlpatterns = [
     url(r'profile', views.userprofile, name='user-profile'),
     url(r'data/view', views.viewdata, name='view-data'),
     url(r'tag/assign', views.assigntag, name='assign-tag'),
-
+    url(r'wiki', views.wikimain, name="wiki-main"),
 ]
 
 if settings.DEBUG:
