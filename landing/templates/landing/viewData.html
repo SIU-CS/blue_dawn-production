@@ -2,23 +2,21 @@
 {% block content %}
 {% for item in allData %}
 <table>
-	<thead>
-		<tr>
-			<th>Name</th>
-			<th>Description</th>
-			<th>DataSet</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<th>Name</th>
-			<th>Des</th>
-			{% for key, value in item.data.items %}
-				<td>{{key}}</td><td>{{value}}</td>
+	
+	{% for key, value in item.data.items %}
+		<thead>
+			<tr>
+				<td>{{key}}</td>
+			</tr>
+		</thead>
+		<tbody>
+			<td>{{value}}</td>
+		</tbody>
+				
 					
 			{% endfor %}	
-		</tr>
-	</tbody>
+		
+	
 </table>
 {% endfor %}
 {% endblock %}
