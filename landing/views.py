@@ -6,7 +6,7 @@ from .form import FileForm
 from django.http import HttpResponseRedirect
 from landing.JSONDataSet import JSONDataSet
 from landing.JSONDataSet import FileType
-from pprint import pprint
+from landing.JSONDataSet import InputException
 from django.core.files.storage import default_storage
 from django.conf import settings
 import os
@@ -53,9 +53,14 @@ def importing(request):
 
             name = request.POST.get("name", "")
             description = request.POST.get("description", "")
-            
-            data = JSONDataSet(filepath, filetype, name, description)
-            data.SaveDataset(request.user) # save dataset to database as json
+
+            try:            
+                data = JSONDataSet(filepath, filetype, name, description)
+                data.SaveDataset(request.user) # save dataset to database as json
+            except InputException:
+                # TODO: correct way to error out here?
+                os.remove(filepath) # delete the temporary file
+                return HttpResponseRedirect('http://127.0.0.1:8000')
 
             os.remove(filepath) # delete the temporary file
 

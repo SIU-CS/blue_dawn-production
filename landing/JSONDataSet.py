@@ -9,7 +9,11 @@ class FileType(Enum):
     CSV=0
     XLSX=1
     JSON=2
-    
+
+class InputException(Exception):
+    def __init__(self, message):
+        self.message = message 
+
 class JSONDataSet:
     """ Class respresented a dataset
     
@@ -52,6 +56,8 @@ class JSONDataSet:
             json_dict["description"] = description
 
             for row in csv_data:
+                if len(row) != 2:
+                    raise InputException("Invalid format in csv file")
                 data_item = dict()
                 data_item["question"] = row[0]
                 data_item["answer"] = row[1]
@@ -76,7 +82,7 @@ class JSONDataSet:
         json_dict["title"] = name
         json_dict["description"] = description
 
-        for i in range(len(xlxs_data['A'])):
+        for i in range(len(min(xlxs_data['A'], xlxs_data['B']))):
             data_item = dict()
             data_item["question"] = xlxs_data['A'][i].value
             data_item["answer"] = xlxs_data['B'][i].value
