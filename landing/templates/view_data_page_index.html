@@ -23,25 +23,10 @@
                     <h2> View Data</h2>
                     <hr>
                     <p> </p>
-                    <table id="data_table">
-                            {% for item in allData %}
-                                {% for key, value in item.data.items %}
-                                  <tr>
-                                    <th>{{key}}</th>
-                                  </tr>
-                                  <tr>
-                                    <td>{{value}}</td>
-                                  </tr>   
-                                {% endfor %}    
-                            {% endfor %}
-                    </table>
+                    {% include 'landing/viewData.html' %}
                 </div>
-                <div class="col-sm-2 sidenav">
-                  <div class="well">
-                      <a href ="{% url 'data-import' %}"><p><span class="glyphicon glyphicon-open-file"></span> Import New Data</p></a>
-                  </div>
-                 
-                </div>
+                
+                {% include 'userSidebar-template.html' %}
             </div>
         
         </div>

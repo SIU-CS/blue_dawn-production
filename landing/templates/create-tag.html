@@ -23,48 +23,20 @@
                     <p></p>
                 </div>
                 <div class="col-sm-8 text-left">
-                    <h2>Assign Tags</h2>
+                    <h2>Creating Tags</h2>
                     <hr>
-                    <p> This is an example of what the tables on this page might end up looking like.</p>
-                    <button onclick="populateTable()"> Populate Test</button>
-                    <table id="data_table">
-                        <tr>
-                            <th>Question</th>
-                            <th>Answer</th>
-                            <th>Tags</th>
-                        </tr>
-                        <tr>
-                        
-                        </tr>
-                       
-                    </table>
+                    <p>This is the creating/removing tags page.</p>
+                    
                 </div>
+                
                 {% include 'userSidebar-template.html' %}
             </div>
         
         </div>
-    
+        
     <footer class="container-fluid text-center">
   <p>Footer</p>
-</footer>
- <script>
-//Script to populate the data table
-   function populateTable(){
-       var table = document.getElementById("data_table");
-       
-       for(var i = 1;i <= 15; i++){
-       var row = table.insertRow(i);
-       var c1 = row.insertCell(0);
-       var c2 = row.insertCell(1);
-       var c3 = row.insertCell(2);
-       c1.innerHTML = "Question "+i;
-       c2.innerHTML = "Answer "+i; 
-       c3.innerHTML = "Dropdown Tag List"
-       }
-   }     
-        
-     
-</script>   
+</footer>  
     
 </body>
 </html>
