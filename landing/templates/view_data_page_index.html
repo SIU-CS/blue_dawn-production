@@ -23,18 +23,7 @@
                     <h2> View Data</h2>
                     <hr>
                     <p> </p>
-                    <table id="data_table">
-                            {% for item in allData %}
-                                {% for key, value in item.data.items %}
-                                  <tr>
-                                    <th>{{key}}</th>
-                                  </tr>
-                                  <tr>
-                                    <td>{{value}}</td>
-                                  </tr>   
-                                {% endfor %}    
-                            {% endfor %}
-                    </table>
+                    {% include 'landing/viewData.html' %}
                 </div>
                 
                 {% include 'userSidebar-template.html' %}
