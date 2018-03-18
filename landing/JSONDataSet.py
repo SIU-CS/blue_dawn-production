@@ -9,7 +9,7 @@ class FileType(Enum):
     CSV=0
     XLSX=1
     JSON=2
-
+    
 class JSONDataSet:
     def __init__(self, filepath, filetype, name, description):
         if filetype == FileType.CSV:
