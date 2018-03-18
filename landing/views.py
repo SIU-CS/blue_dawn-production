@@ -76,6 +76,6 @@ def json2Table(request):
 	context = {
 		'allData': allData,
 	}
-	return render(request, 'landing/viewData.html', context)
+	return render(request, 'view_data_page_index.html', context)
 
 

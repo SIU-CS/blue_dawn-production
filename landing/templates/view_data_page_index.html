@@ -22,14 +22,18 @@
                 <div class="col-sm-8 text-left">
                     <h2> View Data</h2>
                     <hr>
-                    <p> This is an example of what the tables on this page might end up looking like.</p>
-                    <button onclick="populateTable()"> Populate Test</button>
+                    <p> </p>
                     <table id="data_table">
-                        <tr>
-                            <th>Tag Name</th>
-                            <th>Number of Assignments</th>
-                        </tr>
-                       
+                            {% for item in allData %}
+                                {% for key, value in item.data.items %}
+                                  <tr>
+                                    <th>{{key}}</th>
+                                  </tr>
+                                  <tr>
+                                    <td>{{value}}</td>
+                                  </tr>   
+                                {% endfor %}    
+                            {% endfor %}
                     </table>
                 </div>
                 <div class="col-sm-2 sidenav">
@@ -47,7 +51,7 @@
 </footer>
  <script>
 //Script to populate the data table
-   function populateTable(){
+   /**function populateTable(){
        var table = document.getElementById("data_table");
        
        for(var i = 1;i <= 15; i++){
@@ -57,7 +61,7 @@
        c1.innerHTML = "Tag"+i;
        c2.innerHTML = ""+i;      
        }
-   }     
+   }**/     
         
      
 </script>   
