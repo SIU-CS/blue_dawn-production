@@ -25,6 +25,7 @@ class JSONDataSet:
                 for row in csv_data:
                     data_item = dict()
                     data_item["question"] = row[0]
+                    data_item["answer"] = row[1]
                     data_item["tag"] = str()
                     json_dict["data"].append(data_item)
                 
@@ -39,13 +40,12 @@ class JSONDataSet:
             json_dict["title"] = name
             json_dict["description"] = description
             
-            i = 0
-            for elem in xlxs_data['A']:
+            for i in range(len(xlxs_data['A'])):
                 data_item = dict()
-                data_item["question"] = elem.value
+                data_item["question"] = xlxs_data['A'][i].value
+                data_item["answer"] = xlxs_data['B'][i].value
                 data_item["tag"] = str()
                 json_dict["data"].append(data_item)
-                i += 1
 
             self.json_dict = json_dict
 
