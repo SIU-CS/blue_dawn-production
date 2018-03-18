@@ -29,6 +29,9 @@ def assigntag(request):
 
 def wikimain(request):
     return render(request,'wiki-main.html')
+
+def createtag(request):
+    return render(request, 'create-tag.html')
   
 def importing(request):
     form = FileForm(request.POST or None)
