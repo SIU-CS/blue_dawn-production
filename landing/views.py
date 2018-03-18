@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views import generic
 from django.template import RequestContext
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 from .form import FileForm
 from django.http import HttpResponseRedirect
 from landing.JSONDataSet import JSONDataSet
@@ -77,3 +77,5 @@ def json2Table(request):
 		'allData': allData,
 	}
 	return render(request, 'landing/viewData.html', context)
+
+
