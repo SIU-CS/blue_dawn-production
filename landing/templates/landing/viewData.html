@@ -1,22 +1,15 @@
 {% load staticfiles %}
 {% block content %}
+<table border="1">
 {% for item in allData %}
-<table>
-	
 	{% for key, value in item.data.items %}
-		<thead>
 			<tr>
-				<td>{{key}}</td>
+				<th>{{key}}</th>
 			</tr>
-		</thead>
-		<tbody>
-			<td>{{value}}</td>
-		</tbody>
-				
-					
-			{% endfor %}	
-		
-	
-</table>
+			<tr>
+				<td>{{value}}</td>
+			</tr>		
+	{% endfor %}		
 {% endfor %}
+</table>
 {% endblock %}
