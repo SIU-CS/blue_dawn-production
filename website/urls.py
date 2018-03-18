@@ -31,6 +31,8 @@ urlpatterns = [
     url(r'data/view', views.viewdata, name='view-data'),
     url(r'tag/assign', views.assigntag, name='assign-tag'),
     url(r'wiki', views.wikimain, name="wiki-main"),
+    url(r'json2Table', views.json2Table, name="json2Table"),
+
 ]
 
 if settings.DEBUG:

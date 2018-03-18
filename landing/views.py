@@ -10,6 +10,7 @@ from pprint import pprint
 from django.core.files.storage import default_storage
 from django.conf import settings
 import os
+from .models import DataSet
 
 def index(request):
     return render(request,'index.html')
@@ -68,3 +69,11 @@ def saveUploadedFile(fpntr):
             destination.write(chunk)
 
     return settings.MEDIA_ROOT + "/tmp/" + fpntr.name
+
+# dispaly json data on a table
+def json2Table(request):
+	allData = DataSet.objects.all()
+	context = {
+		'allData': allData,
+	}
+	return render(request, 'landing/viewData.html', context)
