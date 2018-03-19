@@ -1,8 +1,17 @@
 {% load staticfiles %}
 {% block content %}
 <table border="1">
-    {% for item in allData %}
-        <p>{{item.data}}</p>
+    <tr>
+        <th>Question</th>
+        <th>Answer</th>
+        <th>Tag</th>
+    </tr>
+    {% for item in data %}
+    <tr>
+        <td>{{item.question}}</td>
+        <td>{{item.answer}}</td>
+        <td>{{item.tag}}</td>
+    </td>
     {% endfor %}
 </table>
 {% endblock %}

@@ -9,6 +9,12 @@
         <link rel ="stylesheet" href="{% static 'css/style.css' %}">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+        <style>
+            tr:hover {
+                background-color: #a2c0ef;
+            }
+        </style>
     </head>
     <body>
         {% include 'topBar-template.html' %}
@@ -20,19 +26,27 @@
                     <p></p>
                 </div>
                 <div class="col-sm-8 text-left">
-                    <h2><span class="glyphicon glyphicon-user"></span> John Smith</h2>
+                    <h2><span class="glyphicon glyphicon-user"></span> {{username}}</h2>
                     <hr>
-                    <p>[List of user's datasets will be loaded into here to be selected from]</p>
+                    <table>
+                        {% for item in data %}
+                        <tr>
+                            <td onclick="location.href='{% url 'view-data' %}?dataset=' + id" id='data-{{item.id}}'>{{item.name}}</td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+
                 </div>
                 {% include 'userSidebar-template.html' %}
             </div>
         
         </div>
     
-    <footer class="container-fluid text-center">
-  <p>Footer</p>
-</footer>
+        <footer class="container-fluid text-center">
+        <p>Footer</p>
+        </footer>
     
     
-</body>
+    </body>
+
 </html>

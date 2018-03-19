@@ -6,10 +6,11 @@ from .form import FileForm
 from django.http import HttpResponseRedirect
 from landing.JSONDataSet import JSONDataSet
 from landing.JSONDataSet import FileType
-from pprint import pprint
+from landing.JSONDataSet import InputException
 from django.core.files.storage import default_storage
 from django.conf import settings
 import os
+import json
 from .models import DataSet
 
 def index(request):
@@ -19,13 +20,24 @@ def login(request):
     return render(request,'login_page_index.html')
 	
 def userprofile(request):
-    return render(request,'user_page_index.html')
+    data = list(map(lambda x: x.json_dict["title"], JSONDataSet.GetDatasets(request.user)))
+    datasets = JSONDataSet.GetDatasets(request.user)
+    username = request.user.username
+
+    data = list()
+    for d in datasets:
+        temp = dict()
+        temp['id'] = d.id
+        temp['name'] = d.json_dict["title"]
+        data.append(temp)
+
+    return render(request,'user_page_index.html', {"data": data, "username": username})
 
 def viewdata(request):
     return render(request,'view_data_page_index.html')
 
 def assigntag(request):
-	return render(request,'assign_tag_page_index.html')
+    return render(request,'assign_tag_page_index.html')
 
 def wikimain(request):
     return render(request,'wiki-main.html')
@@ -53,9 +65,14 @@ def importing(request):
 
             name = request.POST.get("name", "")
             description = request.POST.get("description", "")
-            
-            data = JSONDataSet(filepath, filetype, name, description)
-            data.SaveDataset(request.user) # save dataset to database as json
+
+            try:            
+                data = JSONDataSet(filepath, filetype, name, description)
+                data.SaveDataset(request.user) # save dataset to database as json
+            except InputException:
+                # TODO: correct way to error out here?
+                os.remove(filepath) # delete the temporary file
+                return HttpResponseRedirect('http://127.0.0.1:8000')
 
             os.remove(filepath) # delete the temporary file
 
@@ -75,10 +92,17 @@ def saveUploadedFile(fpntr):
 
 # dispaly json data on a table
 def json2Table(request):
-	allData = DataSet.objects.all()
-	context = {
-		'allData': allData,
-	}
-	return render(request, 'view_data_page_index.html', context)
+    parameter = request.GET.get('dataset', '')
+    if (parameter != ""):
+        id = parameter.split('-', 1)[1]
+        data = JSONDataSet.GetDataset(id).json_dict['data']
+    else:
+        data = None
+
+    context = {
+        'data': data,
+    }
+
+    return render(request, 'view_data_page_index.html', context)
 
 
