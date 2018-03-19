@@ -72,7 +72,7 @@ def importing(request):
             except InputException:
                 # TODO: correct way to error out here?
                 os.remove(filepath) # delete the temporary file
-                return HttpResponseRedirect('http://127.0.0.1:8000')
+                return render(request, 'view_data_page_index.html')
 
             os.remove(filepath) # delete the temporary file
 
