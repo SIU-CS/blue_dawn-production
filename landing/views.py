@@ -17,9 +17,9 @@ def index(request):
     return render(request,'index.html')
 
 def login(request):
-    return render(request,'login_page_index.html')
+    return render(request,'login.html')
 	
-def userprofile(request):
+def profile(request):
     data = list(map(lambda x: x.json_dict["title"], JSONDataSet.GetDatasets(request.user)))
     datasets = JSONDataSet.GetDatasets(request.user)
     username = request.user.username
@@ -31,19 +31,10 @@ def userprofile(request):
         temp['name'] = d.json_dict["title"]
         data.append(temp)
 
-    return render(request,'user_page_index.html', {"data": data, "username": username})
+    return render(request,'profile.html', {"data": data, "username": username})
 
-def viewdata(request):
-    return render(request,'view_data_page_index.html')
-
-def assigntag(request):
-    return render(request,'assign_tag_page_index.html')
-
-def wikimain(request):
-    return render(request,'wiki-main.html')
-
-def createtag(request):
-    return render(request, 'create-tag.html')
+def wiki(request):
+    return render(request,'wiki.html')
   
 def importing(request):
     form = FileForm(request.POST or None)
@@ -59,7 +50,7 @@ def importing(request):
                 filetype = FileType.XLSX
             else:
                 # TODO: correct way to error out here?
-                return render(request, 'landing/datafile_form.html', { 'form': form })
+                return render(request, 'importing.html', { 'form': form })
 
             filepath = saveUploadedFile(f) # save file to disk temporarily
 
@@ -72,13 +63,24 @@ def importing(request):
             except InputException:
                 # TODO: correct way to error out here?
                 os.remove(filepath) # delete the temporary file
-                return render(request, 'view_data_page_index.html')
+                return render(request, 'importing.html')
 
             os.remove(filepath) # delete the temporary file
 
-            return HttpResponseRedirect('http://127.0.0.1:8000')
+            data = list(map(lambda x: x.json_dict["title"], JSONDataSet.GetDatasets(request.user)))
+            datasets = JSONDataSet.GetDatasets(request.user)
+            username = request.user.username
+
+            data = list()
+            for d in datasets:
+                temp = dict()
+                temp['id'] = d.id
+                temp['name'] = d.json_dict["title"]
+                data.append(temp)
+
+            return render(request,'profile.html', {"data": data, "username": username})
 		
-    return render(request, 'landing/datafile_form.html', { 'form': form })
+    return render(request, 'importing.html', { 'form': form })
 
 
 # save an InMemoryUploadedFile to disk
@@ -91,7 +93,7 @@ def saveUploadedFile(fpntr):
     return settings.MEDIA_ROOT + "/tmp/" + fpntr.name
 
 # dispaly json data on a table
-def json2Table(request):
+def viewdata(request):
     parameter = request.GET.get('dataset', '')
     if (parameter != ""):
         id = parameter.split('-', 1)[1]
@@ -103,6 +105,6 @@ def json2Table(request):
         'data': data,
     }
 
-    return render(request, 'view_data_page_index.html', context)
+    return render(request, 'viewdata.html', context)
 
 

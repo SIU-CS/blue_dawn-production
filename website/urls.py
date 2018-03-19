@@ -25,13 +25,11 @@ from django.conf.urls import url
 urlpatterns = [
     path('', views.index, name='index'),
     path('admin/', admin.site.urls),
-    url(r'data/import', views.importing, name='data-import'),
-    url(r'login', views.login, name='login'),
-    url(r'profile', views.userprofile, name='user-profile'),
-    url(r'data/view', views.json2Table, name='view-data'),
-    url(r'tag/assign', views.assigntag, name='assign-tag'),
-    url(r'wiki', views.wikimain, name="wiki-main"),
-    url(r'createtag', views.createtag, name="create-tag"),
+    url(r'^importing$', views.importing, name='importing'),
+    url(r'^login$', views.login, name='login'),
+    url(r'^profile$', views.profile, name='profile'),
+    url(r'^viewdata$', views.viewdata, name='viewdata'),
+    url(r'^wiki$', views.wiki, name="wiki"),
 ]
 
 if settings.DEBUG:
