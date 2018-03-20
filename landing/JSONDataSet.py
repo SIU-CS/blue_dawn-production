@@ -82,15 +82,15 @@ class JSONDataSet:
         json_dict["title"] = name
         json_dict["description"] = description
 
-        for i in range(len(min(xlxs_data['A'], xlxs_data['B']))):
+        pprint(xlxs_data['A'])
+        for i in range(min(len(xlxs_data['A']), len(xlxs_data['B']))):
             data_item = dict()
             data_item["question"] = xlxs_data['A'][i].value
             data_item["answer"] = xlxs_data['B'][i].value
             data_item["tag"] = str()
             json_dict["data"].append(data_item)
 
-        self.json_dict = json_dict
-
+        return json_dict
 
     # write this dataset to the database
     def SaveDataset(self, user):
