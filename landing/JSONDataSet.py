@@ -82,7 +82,6 @@ class JSONDataSet:
         json_dict["title"] = name
         json_dict["description"] = description
 
-        pprint(xlxs_data['A'])
         for i in range(min(len(xlxs_data['A']), len(xlxs_data['B']))):
             data_item = dict()
             data_item["question"] = xlxs_data['A'][i].value
