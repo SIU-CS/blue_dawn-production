@@ -127,15 +127,31 @@ def signup(request):
                 'user': user,
                 'domain': current_site.domain,
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                'token': account_activation_token.make_token(user),
+                'token': accountActivation.make_token(user),
             })
             user.email_user(subject, message)
             return redirect('email_activation_sent')
     else:
-        form = SignUpForm()
+        form = RegistrationForm()
     return render(request, 'signup.html', {'form': form})
 
 def email_activation_sent(request):
     return render(request, 'email_activation.html')
+
+def activate(request, uidb64, token):
+    try:
+        uid = force_text(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+
+    if user is not None and accountActivation.check_token(user, token):
+        user.is_active = True
+        user.profile.email_confirmed = True
+        user.save()
+        login(request, user)
+        return redirect('index.html')
+    else:
+        return render(request, 'signup.html')
 
 
