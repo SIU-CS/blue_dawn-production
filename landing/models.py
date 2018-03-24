@@ -12,10 +12,10 @@ class DataSet(models.Model):
 
 class Confirm(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
-	confirm = models.BooleanField(default = False)
+	confirmation = models.BooleanField(default = False)
 
 @receiver(post_save, sender=User)
-class update_profile(sender, instance, created, **kwargs):
+def update_profile(sender, instance, created, **kwargs):
 	if created:
 		Confirm.objects.create(user=instance)
 	instance.confirm.save()

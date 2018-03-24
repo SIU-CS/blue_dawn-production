@@ -17,8 +17,8 @@ from django.shortcuts import render, redirect
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 from django.template.loader import render_to_string
-from landing.core.forms import RegistrationForm
-from landing.core.tokens import accountActivation
+from .form import RegistrationForm
+from .tokens import accountActivation
 
 def index(request):
     return render(request,'index.html')
@@ -123,16 +123,19 @@ def signup(request):
             user.save()
             current_site = get_current_site(request)
             subject = 'Activate you account'
-            message = render_to_string('account_activation_email.html', {
+            message = render_to_string('email_activation.html', {
                 'user': user,
                 'domain': current_site.domain,
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)),
                 'token': account_activation_token.make_token(user),
             })
             user.email_user(subject, message)
-            return redirect('account_activation_sent')
+            return redirect('email_activation_sent')
     else:
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
+
+def email_activation_sent(request):
+    return render(request, 'email_activation.html')
 
 

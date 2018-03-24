@@ -30,6 +30,10 @@ urlpatterns = [
     url(r'^profile$', views.profile, name='profile'),
     url(r'^viewdata$', views.viewdata, name='viewdata'),
     url(r'^wiki$', views.wiki, name="wiki"),
+    url(r'^signup$', views.signup, name ="signup"),
+    url(r'^email_activation_sent/$', views.email_activation_sent, name='email_activation_sent'),
+    #url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
+     #   views.activate, name='activate'),
 ]
 
 if settings.DEBUG:
