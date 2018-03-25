@@ -12,11 +12,11 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 
 
 
-#EMAIL_HOST = 'smtp.mailgun.org'
-#EMAIL_PORT = 587
-#EMAIL_HOST_USER = 'postmaster@mg.bluedawn.club'
-#EMAIL_HOST_PASSWORD = 'Ahmed@123'
-#EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.mailgun.org'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'postmaster@mg.bluedawn.club'
+EMAIL_HOST_PASSWORD = 'Ahmed@123'
+EMAIL_USE_TLS = True
 
 import os
 
@@ -39,13 +39,14 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+	'landing.apps.LandingConfig',
 	'django.contrib.admin',
 	'django.contrib.auth',
 	'django.contrib.contenttypes',
 	'django.contrib.sessions',
 	'django.contrib.messages',
 	'django.contrib.staticfiles',
-	'landing.apps.LandingConfig',
+	
 ]
 
 MIDDLEWARE = [
@@ -135,4 +136,4 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
