@@ -7,6 +7,7 @@
         <meta name="viewport" content="width=device-width,initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link rel ="stylesheet" href="{% static 'css/style.css' %}">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
@@ -34,14 +35,16 @@
                       <input type="password" placeholder="Enter Password" name="psw" required>
                         <hr>
 
-                        <a href="{% url 'profile' %}"><button type="submit">Login</button></a>
+                        <a href="{% url 'profile' %}"><button type="submit" class="w3-btn w3-ripple w3-blue">Login</button></a> <br>
                       <label>
                         <input type="checkbox" checked="checked" name="remember"> Remember me
                       </label>
                     </div>
-
+                    <div class="container text-center">
+                      <span> <a href="{% url 'signup' %}">SignUp</a> </span>
+                    </div>
                     <div class="container text-center" style="background-color:#f1f1f1">
-                      <span class="psw">Forgot <a href="#">password?</a></span>
+                      <span class="psw">Forgot <a href="{% url 'password_reset' %}">password?</a></span>
                     </div>
 
                     </div>
