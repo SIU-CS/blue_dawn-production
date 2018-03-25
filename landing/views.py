@@ -161,8 +161,11 @@ def activate(request, uidb64, token):
 		user.save()
 		login(request)
 		#return redirect('index.html')
-		return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
+		return redirect('activation_complete')
 	else:
 		return render(request, 'signup.html')
+
+def activation_complete(request):
+	return render(request, 'activation_complete.html')
 
 
