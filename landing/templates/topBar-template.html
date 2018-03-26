@@ -15,7 +15,11 @@
                 <li><a href="{% url 'wiki' %}">Wiki</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'profile' %}"><span class="glyphicon glyphicon-log-in"> {{request.user.username}}</span></a></li>
+                {% else %}
                 <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"> Login</span></a></li>
+                {% endif %}
             </ul>
         </div>
     </div>
