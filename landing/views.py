@@ -133,7 +133,6 @@ def signup(request):
 				'uid': urlsafe_base64_encode(force_bytes(user.pk)).decode(),
 				'token': accountActivation.make_token(user),
 			})
-			#user.email_user(subject, message)
 			to_email = form.cleaned_data.get('email')
 			email = EmailMessage(
 						subject, message, to=[to_email]
@@ -160,7 +159,6 @@ def activate(request, uidb64, token):
 		user.confirm.confirmation = True
 		user.save()
 		login(request)
-		#return redirect('index.html')
 		return redirect('activation_complete')
 	else:
 		return render(request, 'signup.html')
