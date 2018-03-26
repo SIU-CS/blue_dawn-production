@@ -7,6 +7,7 @@
         <meta name="viewport" content="width=device-width,initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link rel ="stylesheet" href="{% static 'css/style.css' %}">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>        
     </head>
@@ -25,7 +26,7 @@
                     <hr>
                     {% block content %}
   						<p>
-    						Your email confirmation has been successfully completed. You can go ahead and <a class="btn btn-default" href="{% url 'login' %}" role="button"> Login </a> now.
+    						Your email confirmation has been successfully completed. You can go ahead and <a class="w3-btn w3-ripple w3-blue" href="{% url 'login' %}" role="button"> Login </a> now.
   						</p>
 					{% endblock %}
 		            
