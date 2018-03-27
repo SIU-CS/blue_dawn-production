@@ -84,6 +84,7 @@ tr:nth-child(even){
     background-color: #f2f2f2; 
 }
 
+
 @media screen and (max-width:767px){
     .sidenav{
         height:100%;
@@ -96,4 +97,12 @@ tr:nth-child(even){
        display: block;
        float: none;
     }
+    .tagbox{
+	width:50%;
+    }
+    .textbox{
+	max-width:50%;
+	max-height:50%;
+	width:50%;
+}
 }
