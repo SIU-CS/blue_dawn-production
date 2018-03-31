@@ -61,7 +61,7 @@ class JSONDataSet:
                 data_item = dict()
                 data_item["question"] = row[0]
                 data_item["answer"] = row[1]
-                data_item["tag"] = str()
+                data_item["tag"] = list()
                 json_dict["data"].append(data_item)
     
             return json_dict
@@ -86,7 +86,7 @@ class JSONDataSet:
             data_item = dict()
             data_item["question"] = xlxs_data['A'][i].value
             data_item["answer"] = xlxs_data['B'][i].value
-            data_item["tag"] = str()
+            data_item["tag"] = list()
             json_dict["data"].append(data_item)
 
         return json_dict
