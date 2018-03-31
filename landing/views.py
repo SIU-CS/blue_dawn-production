@@ -22,6 +22,7 @@ from django.template.loader import render_to_string
 from .form import RegistrationForm
 from .tokens import accountActivation
 from django.core.mail import EmailMessage
+from django.contrib.auth.decorators import login_required
 
 
 def index(request):
@@ -29,7 +30,8 @@ def index(request):
 
 def login(request):
 	return render(request,'login.html')
-	
+
+@login_required(login_url="/login")
 def profile(request):
 	data = list(map(lambda x: x.json_dict["title"], JSONDataSet.GetDatasets(request.user)))
 	datasets = JSONDataSet.GetDatasets(request.user)
@@ -46,7 +48,7 @@ def profile(request):
 
 def wiki(request):
 	return render(request,'wiki.html')
-  
+
 def importing(request):
 	form = FileForm(request.POST or None)
 	if request.method == 'POST':
@@ -68,7 +70,7 @@ def importing(request):
 			name = request.POST.get("name", "")
 			description = request.POST.get("description", "")
 
-			try:            
+			try:
 				data = JSONDataSet(filepath, filetype, name, description)
 				data.SaveDataset(request.user) # save dataset to database as json
 			except InputException:
@@ -90,7 +92,7 @@ def importing(request):
 				data.append(temp)
 
 			return render(request,'profile.html', {"data": data, "username": username})
-		
+
 	return render(request, 'importing.html', { 'form': form })
 
 
@@ -165,5 +167,3 @@ def activate(request, uidb64, token):
 
 def activation_complete(request):
 	return render(request, 'activation_complete.html')
-
-
