@@ -111,13 +111,15 @@ def viewdata(request):
 	if (parameter != ""):
 		id = parameter.split('-', 1)[1]
 		data = JSONDataSet.GetDataset(id).json_dict['data']
+		tags = JSONDataSet.GetDataset(id).json_dict['tags']
 	else:
 		data = None
 
 	context = {
 		'data': data,
+		'tags': tags,
 	}
-
+  
 	return render(request, 'viewdata.html', context)
 
 def signup(request):

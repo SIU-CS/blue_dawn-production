@@ -132,6 +132,9 @@ class JSONDataSet:
             JSONDataSet: The dataset with that id from the database
         """
         return JSONDataSet(DataSet.objects.get(id=id).data, FileType.JSON, "", "", id)
+    
+    def GetTags(id):
+        return JSONDataSet(DataSet.objects.get(id=id).tags, FileType.JSON, "", "", id)
 
     def SetTags(tags):
         """ Set the list of tags on this dataset
