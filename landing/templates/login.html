@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     </head>
     <body>
         {% include 'topBar-template.html' %}
@@ -28,11 +29,11 @@
                         <form method="post">
                       {% csrf_token %}
                       {{ form.as_p }}
-
+                      
                         <a href="{% url 'profile' %}"><button type="submit" class="w3-btn w3-ripple w3-blue">Login</button></a> <br>
                         </form>
                       <label>
-                        <input type="checkbox" checked="checked" name="remember"> Remember me
+                        <input type="checkbox" checked="checked" name="remember" id="checkedbox"> Remember me
                       </label>
                     </div>
                     <div class="container text-center">
@@ -51,6 +52,34 @@
             </div>
         
         </div>
+        <script >
+            $(function () {
+
+    if (localStorage.chkbox && localStorage.chkbox != '') {
+        $('#checkedbox').attr('checked', 'checked');
+        $('#id_username').val(localStorage.username);
+        $('#id_password').val(localStorage.pass);
+    } else {
+        $('#checkedbox').removeAttr('checked');
+        $('#id_username').val('');
+        $('#id_password').val('');
+    }
+
+    $('#checkedbox').click(function () {
+
+        if ($('#checkedbox').is(':checked')) {
+            // save username and password
+            localStorage.username = $('#id_username').val();
+            localStorage.pass = $('#id_password').val();
+            localStorage.chkbox = $('#checkedbox').val();
+        } else {
+            localStorage.username = '';
+            localStorage.pass = '';
+            localStorage.chkbox = '';
+        }
+    });
+});
+        </script>
     
     <footer class="container-fluid text-center">
   <p>Footer</p>
