@@ -88,7 +88,7 @@ DATABASES = {
 		'ENGINE': 'django.db.backends.mysql',
 		'NAME': 'BlueDawnAnalysis',
 		'USER': 'root',
-		'PASSWORD': '',
+		'PASSWORD': 'ABarron505HHS+15',
 		'HOST': '',
 		'PORT': '',
 	}

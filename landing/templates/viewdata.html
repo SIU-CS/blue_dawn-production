@@ -8,12 +8,21 @@
         <meta name="viewport" content="width=device-width,initial-scale=1">
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<link rel ="stylesheet" href="{% static 'css/style.css' %}">
+        <link rel ="stylesheet" href="{% static 'css/style.css' %}">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
-
+	    
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script>
+            function addTag(){
+               
+            }
+            function exportData(){
+                
+            }                                                                 
+        </script>
     </head>
     <body>
         {% include 'topBar-template.html' %}
@@ -28,11 +37,19 @@
                             <textarea name="newTag" class="textbox" rows="5" cols="30" style="width:100%; resize:none">New Tag
                             </textarea>
                             <br>
-                            <button type="button" class="btn btn-default btn-sm">
+                            <button type="button" onclick="addTag()" class="btn btn-default btn-sm">
                             <span class="glyphicon glyphicon-plus"></span> Add
                             </button>
                         </form>
                     </div>
+                    <div class="well">
+                      <h5><span class="glyphicon glyphicon-tag"></span>Tags</h5>
+                      <div id="sidebar">
+                          <span class="badge" style="background-color:deepskyblue">Tag 1 
+                             <span class="glyphicon glyphicon-remove"></span> 
+                          </span>
+                      </div>
+                   </div>
                 </div>
                 <div class="col-sm-8 text-left">
                     <h2> View Data</h2>

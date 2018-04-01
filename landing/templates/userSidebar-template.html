@@ -1,16 +1,12 @@
 <div class="col-sm-2 sidenav">
   <div class="well">
-      <a href ="{% url 'importing' %}"><p><span class="glyphicon glyphicon-open-file"></span> Import Data</p></a>
+    <a href="{% url 'profile' %}"><p><span class="glyphicon glyphicon-folder-open"><p></p></span> Select Data</p></a>
   </div>
   <div class="well">
-    <a href="{% url 'profile' %}"><p><span class="glyphicon glyphicon-folder-open"></span> Select Data</p></a>
+      <a href ="{% url 'importing' %}"><p><span class="glyphicon glyphicon-import"><p></p></span> Import Data</p></a>
   </div>
   <div class="well">
-      <h5><span class="glyphicon glyphicon-tag"></span>Tags</h5>
-      <div>
-          <span class="badge" style="background-color:deepskyblue">Tag 1 
-             <span class="glyphicon glyphicon-remove"></span> 
-          </span>
-      </div>
+    <a href="javascript:exportData()"><p><span class="glyphicon glyphicon-export"><p></p></span>Export Data</p></a>
   </div>
+
 </div>
