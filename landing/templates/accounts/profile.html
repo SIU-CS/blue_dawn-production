@@ -31,7 +31,7 @@
                     <table>
                         {% for item in data %}
                         <tr>
-                            <td onclick="location.href='{% url 'viewdata' %}?dataset=' + id" id='data-{{item.id}}'>{{item.name}}</td>
+                            <td onclick="location.href='{% url 'viewdata' %}?dataset=' + id" id='data-{{item.id}}'>{{item.name}} </td>
                         </tr>
                         {% endfor %}
                     </table>
