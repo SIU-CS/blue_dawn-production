@@ -138,7 +138,7 @@ class JSONDataSet:
     def GetTags(id):
         return JSONDataSet(DataSet.objects.get(id=id).tags, FileType.JSON, "", "", id)
 
-    def SetTags(tags):
+    def SetTags(self,tags):
         """ Set the list of tags on this dataset
         
         Args:

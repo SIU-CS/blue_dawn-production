@@ -23,6 +23,8 @@ from .form import RegistrationForm
 from .tokens import accountActivation
 from django.core.mail import EmailMessage
 from django.contrib.auth.decorators import login_required
+from pprint import pprint
+from django.http import JsonResponse
 
 
 def index(request):
@@ -105,7 +107,7 @@ def saveUploadedFile(fpntr):
 
 	return settings.MEDIA_ROOT + "/tmp/" + fpntr.name
 
-# dispaly json data on a table
+# display json data on a table
 def viewdata(request):
 	parameter = request.GET.get('dataset', '')
 	if (parameter != ""):
@@ -118,9 +120,27 @@ def viewdata(request):
 	context = {
 		'data': data,
 		'tags': tags,
+		'id': id,
 	}
   
 	return render(request, 'viewdata.html', context)
+
+def addtag(request):
+	try:
+		dataset = JSONDataSet.GetDataset(request.POST.get("id", ""))
+		tags = dataset.json_dict['tags']
+		tags.append(request.POST.get('tag',''))
+		dataset.SetTags(tags)
+		dataset.SaveDataset(request.user)
+		toreturn = dict()
+		toreturn['results']=True
+		return JsonResponse(toreturn)
+	except Exception as e:
+		toreturn = dict()
+		toreturn['results']=False
+		toreturn['message']=str(e)
+		return JsonResponse(toreturn)
+
 
 def signup(request):
 	if request.method == 'POST':

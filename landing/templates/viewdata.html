@@ -15,13 +15,27 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" integrity="sha256-ENFZrbVzylNbgnXx0n3I1g//2WeO47XxoPe0vkp3NC8=" crossorigin="anonymous" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha256-3blsJd4Hli/7wCQ+bmgXfOdK7p/ZUMtPXY08jmxSSgk=" crossorigin="anonymous"></script>
         <script>
             $(document).ready( function () {
               $('#userData').DataTable({"pageLength":1, "lengthMenu": [ [1, 10, 25, 50, -1], [1, 10, 25, 50, "All"] ]});
             });
-            
-            function addTag(){
-               
+          
+            function addTag(){           
+                var data = {
+                    'csrfmiddlewaretoken': '{{csrf_token}}',
+                    'tag': $("#newTag").val(),
+                    'id': '{{id}}',
+                };
+                $.post('viewdata/addtag', data, function(data) {
+                    if(data.results){
+                        toastr.success('Tag added successfully');
+                        $('#sidebar').append('<span class="badge" style="background-color:deepskyblue">' + $("#newTag").val() +'<span class="glyphicon glyphicon-remove"></span></span>')
+                    }
+                    else
+                        toastr.error(data.message);
+               } );
             }
             
             function exportData(){
@@ -68,7 +82,7 @@
                     
                     <div class="well">
                         <form>
-                            <textarea name="newTag" class="textbox" rows="5" cols="30" style="width:100%; resize:none">New Tag
+                            <textarea id="newTag" name="newTag" class="textbox" rows="5" cols="30" style="width:100%; resize:none">New Tag
                             </textarea>
                             <br>
                             <button type="button" onclick="addTag()" class="btn btn-default btn-sm">
@@ -91,15 +105,15 @@
                     <h2> View Data</h2>
                     <hr>
                     <table border="1" id="userData">
-                      <thead>
-                          <tr>
+		                <thead>
+                            <tr>
                                 <th>Question</th>
-                          <th>Answer</th>
-                          <th>Tag</th>
-                      </tr>
-                      </thead>
+                	            <th>Answer</th>
+        	                    <th>Tag</th>
+	                        </tr>
+			            </thead>
                         <tbody>
-                            {% for item in data %}
+			                {% for item in data %}
                             <tr>
                                 <td>{{item.question}}</td>
                                 <td>{{item.answer}}</td>
