@@ -14,7 +14,7 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 
 EMAIL_HOST = 'smtp.mailgun.org'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'postmaster@mg.bluedawn.club'
+EMAIL_HOST_USER = 'postmaster@mg.bluedawn.xyz'
 EMAIL_HOST_PASSWORD = 'Ahmed@123'
 EMAIL_USE_TLS = True
 
@@ -88,7 +88,7 @@ DATABASES = {
 		'ENGINE': 'django.db.backends.mysql',
 		'NAME': 'BlueDawnAnalysis',
 		'USER': 'root',
-		'PASSWORD': 'ABarron505HHS+15',
+		'PASSWORD': '',
 		'HOST': '',
 		'PORT': '',
 	}

@@ -6,7 +6,10 @@
       <a href ="{% url 'importing' %}"><p><span class="glyphicon glyphicon-import"><p></p></span> Import Data</p></a>
   </div>
   <div class="well">
-    <a href="javascript:exportData()"><p><span class="glyphicon glyphicon-export"><p></p></span>Export Data</p></a>
+    <p><span class="glyphicon glyphicon-export"><p></p></span>Export Data</p>
+      <input type="radio" name="fileformat" value="csv" checked>.csv
+      <input type="radio" name="fileformat" value="xlxs"> .xlxs <br>
+      <button type="submit" class="w3-btn w3-ripple w3-blue">Export</button>
   </div>
 
 </div>

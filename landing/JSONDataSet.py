@@ -56,6 +56,8 @@ class JSONDataSet:
             json_dict["description"] = description
 
             for row in csv_data:
+                if len(row) == 0:
+                    continue
                 if len(row) != 2:
                     raise InputException("Invalid format in csv file")
                 data_item = dict()
