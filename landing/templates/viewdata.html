@@ -19,13 +19,43 @@
             $(document).ready( function () {
               $('#userData').DataTable({"pageLength":1, "lengthMenu": [ [1, 10, 25, 50, -1], [1, 10, 25, 50, "All"] ]});
             });
-          
+            
             function addTag(){
                
             }
+            
             function exportData(){
                 
-            }                                                                 
+            }
+            
+            function allowDrop(ev) {
+                ev.preventDefault();
+            }
+            
+            var targetStuff = "";
+            
+            function drag(ev) {
+                ev.dataTransfer.setData("text/html", ev.target.id);
+                targetStuff = ev.target.id;
+            }
+            
+            //var listOfUniqueTags = [{% for tag in tags %} "{{tag}}",{% endfor %}];
+            
+            function drop(ev) {
+                //var itm = document.getElementById("myList2").lastChild;
+                //var cln = itm.cloneNode(true);
+                //document.getElementById("myList1").appendChild(cln);
+                
+                //console.log(targetStuff);
+                
+                ev.preventDefault();
+                var data = ev.dataTransfer.getData("text/html");
+                var newNode = document.getElementById("testing").innerHTML += targetStuff + ", ";
+                
+                //ev.target.appendChild(newNode);
+                //ev.target.appendChild(document.getElementById(data).cloneNode(true));
+                //document.getElementById("testing").innerHTML("<p>This is a test</p>");
+            }
         </script>
     </head>
     <body>
@@ -50,7 +80,7 @@
                       <h5><span class="glyphicon glyphicon-tag"></span>Tags</h5>
                       <div id="sidebar">
                         {% for tag in tags %}
-                          <span class="badge" style="background-color:deepskyblue">{{tag}} 
+                          <span id="{{tag}}" class="badge" draggable="true" ondragstart="drag(event)" style="background-color:deepskyblue">{{tag}} 
                              <span class="glyphicon glyphicon-remove"></span> 
                           </span>
                         {% endfor %}
@@ -61,19 +91,23 @@
                     <h2> View Data</h2>
                     <hr>
                     <table border="1" id="userData">
-		        <thead>
-                            <tr>
+                      <thead>
+                          <tr>
                                 <th>Question</th>
-                	        <th>Answer</th>
-        	                <th>Tag</th>
-	                    </tr>
-			</thead>
+                          <th>Answer</th>
+                          <th>Tag</th>
+                      </tr>
+                      </thead>
                         <tbody>
-			    {% for item in data %}
+                            {% for item in data %}
                             <tr>
                                 <td>{{item.question}}</td>
                                 <td>{{item.answer}}</td>
-                                <td>{{item.tag}}</td>
+                                <td id="testing" ondrop="drop(event)" ondragover="allowDrop(event)">
+                                  {% for tags in item.tag %}
+                                    <span>{{tags}},</span>
+                                  {% endfor %}
+                                </td>
                             </tr>
                             {% endfor %}
                         </tbody>
