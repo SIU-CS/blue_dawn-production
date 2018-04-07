@@ -122,24 +122,23 @@ def viewdata(request):
 		'tags': tags,
 		'id': id,
 	}
-  
+
 	return render(request, 'viewdata.html', context)
 
 def addtag(request):
+	toreturn = dict()
 	try:
 		dataset = JSONDataSet.GetDataset(request.POST.get("id", ""))
-		tags = dataset.json_dict['tags']
-		tags.append(request.POST.get('tag',''))
-		dataset.SetTags(tags)
+		dataset.AddTag(request.POST.get('tag'))
 		dataset.SaveDataset(request.user)
-		toreturn = dict()
+
 		toreturn['results']=True
-		return JsonResponse(toreturn)
+
 	except Exception as e:
-		toreturn = dict()
+
 		toreturn['results']=False
 		toreturn['message']=str(e)
-		return JsonResponse(toreturn)
+	return JsonResponse(toreturn)
 
 
 def signup(request):

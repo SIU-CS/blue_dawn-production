@@ -12,11 +12,11 @@ class FileType(Enum):
 
 class InputException(Exception):
     def __init__(self, message):
-        self.message = message 
+        self.message = message
 
 class JSONDataSet:
     """ Class respresented a dataset
-    
+
     Args:
         filepath (str): Path to a csv/xlsx file on disk (In case of JSON, this is actually the (poorly named) data itself)
         filetype (FileType): Enum value representing the type of the file (CSV/XLSX/JSON)
@@ -26,7 +26,7 @@ class JSONDataSet:
     """
     def __init__(self, filepath, filetype, name, description, id=None):
         self.name = name # need to save name as an identifier
-        self.id = id 
+        self.id = id
 
         if filetype == FileType.CSV:
             self.json_dict = self._init_csv(filepath, name, description)
@@ -40,7 +40,7 @@ class JSONDataSet:
 
     def _init_csv(self, filepath, name, description):
         """Initialize the object with a csv file
-        
+
         Args:
             filepath (str): Path to the csv file on disk
             name (str): Name of the dataset
@@ -65,12 +65,12 @@ class JSONDataSet:
                 data_item["answer"] = row[1]
                 data_item["tag"] = list()
                 json_dict["data"].append(data_item)
-    
+
             return json_dict
 
     def _init_xlsx(self, filepath, name, description):
         """Initialize the object with a xlsx file
-        
+
         Args:
             filepath (str): Path to the xlsx file on disk
             name (str): Name of the dataset
@@ -95,17 +95,17 @@ class JSONDataSet:
 
     # write this dataset to the database
     def SaveDataset(self, user):
-        """ Write this dataset to the database; Create a new entry if it isn't already there, and update the old entry if it is 
+        """ Write this dataset to the database; Create a new entry if it isn't already there, and update the old entry if it is
 
         Args:
             user (User): The user that is saving the dataset
         """
-        if (self.id == None): # no id => this isn't in the database 
+        if (self.id == None): # no id => this isn't in the database
             dataset = DataSet(data=json.dumps(self.json_dict), user=user)
         else: # this dataset is already in the database, we're just updating it
             dataset = DataSet.objects.get(id=self.id)
             dataset.data = json.dumps(self.json_dict)
-        
+
         dataset.save()
         self.id = dataset.id
 
@@ -113,7 +113,7 @@ class JSONDataSet:
     @staticmethod
     def GetDatasets(user):
         """ Pull all of the datasets from the database corresponding to a specific user
-        
+
         Args:
             user (User): The user to get datasets for
 
@@ -126,7 +126,7 @@ class JSONDataSet:
     @staticmethod
     def GetDataset(id):
         """ Get the dataset with a specific id
-        
+
         Args:
             id (int): Id of the dataset to get from the database
 
@@ -134,13 +134,16 @@ class JSONDataSet:
             JSONDataSet: The dataset with that id from the database
         """
         return JSONDataSet(DataSet.objects.get(id=id).data, FileType.JSON, "", "", id)
+
+    def AddTag(self, tag):
+        self.json_dict["tags"].append(tag)
     
     def GetTags(id):
         return JSONDataSet(DataSet.objects.get(id=id).tags, FileType.JSON, "", "", id)
 
     def SetTags(self,tags):
         """ Set the list of tags on this dataset
-        
+
         Args:
             tags (list<str>): List of tags to be set to this dataset
         """
