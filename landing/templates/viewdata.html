@@ -25,17 +25,17 @@
             function addTag(){
                 var data = {
                     'csrfmiddlewaretoken': '{{csrf_token}}',
-                    'tag': $("#newTag").val(),
+                    'tag': $("#newTag").val().trim(),
                     'id': '{{id}}',
                 };
                 $.post('viewdata/addtag', data, function(data) {
                     if (data.results) {
                         toastr.success('Tag added successfully');
-                        $('#sidebar').append('<span class="badge" style="background-color:deepskyblue">' + $("#newTag").val() +'<span class="glyphicon glyphicon-remove"></span></span>')
+                        $('#sidebar').append('<span id="' + $("#newTag").val().trim() +'" class="badge" style="background-color:deepskyblue">' + $("#newTag").val().trim() +'<span onclick="removeTag($(this).parent())" class="glyphicon glyphicon-remove"></span></span>')
                     }
                     else
                         toastr.error(data.message);
-               } );
+               });
             }
 
             function exportData(){
@@ -46,6 +46,25 @@
                 ev.preventDefault();
             }
 
+            function removeTag(e) {
+                var tag = e.text();
+
+                var data = {
+                    'csrfmiddlewaretoken': '{{csrf_token}}',
+                    'tag': e.text().trim(),
+                    'id': '{{id}}',
+                };
+
+                $.post('viewdata/removetag', data, function(data) {
+                    if (data.results) {
+                        e.remove();
+                        toastr.success('Tag removed successfully');
+                    }
+                    else
+                        toastr.error(data.message);
+                });
+            }
+
             var targetStuff = "";
 
             function drag(ev) {
@@ -53,7 +72,7 @@
                 targetStuff = ev.target.id;
             }
 
-            
+
             function drop(ev) {
                 //var itm = document.getElementById("myList2").lastChild;
                 //var cln = itm.cloneNode(true);
@@ -93,7 +112,7 @@
                       <div id="sidebar">
                         {% for tag in tags %}
                           <span id="{{tag}}" class="badge" draggable="true" ondragstart="drag(event)" style="background-color:deepskyblue">{{tag}}
-                             <span class="glyphicon glyphicon-remove"></span>
+                             <span onclick="removeTag($(this).parent())" class="glyphicon glyphicon-remove"></span>
                           </span>
                         {% endfor %}
                       </div>

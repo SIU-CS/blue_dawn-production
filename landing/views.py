@@ -139,11 +139,22 @@ def addtag(request):
 			toreturn['results']=True
 
 	except Exception as e:
-
 		toreturn['results']=False
 		toreturn['message']=str(e)
 	return JsonResponse(toreturn)
 
+def removetag(request):
+    toreturn = dict()
+    try:
+        dataset = JSONDataSet.GetDataset(request.POST.get("id"))
+        dataset.RemoveTag(request.POST.get("tag"))
+        dataset.SaveDataset(request.user)
+        toreturn["results"] = True
+    except Exception as e:
+        toreturn['results'] = False
+        toreturn['message'] = str(e)
+        
+    return JsonResponse(toreturn)
 
 def signup(request):
 	if request.method == 'POST':
