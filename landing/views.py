@@ -128,11 +128,15 @@ def viewdata(request):
 def addtag(request):
 	toreturn = dict()
 	try:
-		dataset = JSONDataSet.GetDataset(request.POST.get("id", ""))
-		dataset.AddTag(request.POST.get('tag'))
-		dataset.SaveDataset(request.user)
+		dataset = JSONDataSet.GetDataset(request.POST.get("id"))
 
-		toreturn['results']=True
+		if (dataset.HasTag(request.POST.get("tag"))):
+			toreturn['results'] = False
+			toreturn['message'] = "Tag already exists"
+		else:
+			dataset.AddTag(request.POST.get('tag'))
+			dataset.SaveDataset(request.user)
+			toreturn['results']=True
 
 	except Exception as e:
 

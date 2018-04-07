@@ -137,7 +137,10 @@ class JSONDataSet:
 
     def AddTag(self, tag):
         self.json_dict["tags"].append(tag)
-    
+
+    def HasTag(self, tag):
+        return tag in self.json_dict["tags"]
+
     def GetTags(id):
         return JSONDataSet(DataSet.objects.get(id=id).tags, FileType.JSON, "", "", id)
 
