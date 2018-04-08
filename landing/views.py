@@ -117,7 +117,6 @@ def viewdata(request):
     else:
         data = None
 
-    pprint(data)
     context = {
         'data': data,
         'tags': tags,

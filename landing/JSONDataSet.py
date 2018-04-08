@@ -87,7 +87,7 @@ class JSONDataSet:
         json_dict["title"] = name
         json_dict["description"] = description
 
-        identifer = 0
+        identifier = 0
         for i in range(min(len(xlxs_data['A']), len(xlxs_data['B']))):
             data_item = dict()
             data_item["id"] = identifier
@@ -153,7 +153,6 @@ class JSONDataSet:
         item['tag'] = tags
 
     def ItemHasTag(self, itemId, tag):
-        print("tag checkign: " + tag)
         return tag in next(filter(lambda x: str(x['id']) == itemId, self.json_dict['data']))['tag']
 
     def HasTag(self, tag):

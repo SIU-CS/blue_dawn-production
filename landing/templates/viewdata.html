@@ -86,10 +86,10 @@
                 };
 
                 data.tags.push(targetStuff);
-
                 // removing trailing whitespace
                 for (var i = 0; i < data.tags.length; i++) {
                     data.tags[i] = data.tags[i].trim()
+                    if (data.tags[i] == "") data.tags.splice(i, 1);
                 }
 
                 $.post('viewdata/TagItem', data, function(data) {
@@ -148,7 +148,7 @@
                             <tr>
                                 <td>{{item.question}}</td>
                                 <td>{{item.answer}}</td>
-                                <td id='item-{{item.id}}' ondrop="drop(event)" ondragover="allowDrop(event)">{% for tags in item.tag %}{{tags}}{% if forloop.last is False %}, {% endif %}{% endfor %}</td>
+                                <td id='item-{{item.id}}' ondrop="drop(event)" ondragover="allowDrop(event)">{% for tags in item.tag %}{{tags}}{% if forloop.last is False and item.tag|length > 1 %}, {% endif %}{% endfor %}</td>
                             </tr>
                             {% endfor %}
                         </tbody>
