@@ -1,3 +1,13 @@
+<script>
+    function exportData() {
+        if ($("#exportCSV").prop("checked")) {
+            location.replace("/viewdata/ExportCSV?id={{id}}");
+        } else {
+            location.replace("/viewdata/ExportXLSX?id={{id}}");
+        }
+    }
+</script>
+
 <div class="col-sm-2 sidenav">
   <div class="well">
     <a href="{% url 'profile' %}"><p><span class="glyphicon glyphicon-folder-open"><p></p></span> Select Data</p></a>
@@ -7,9 +17,9 @@
   </div>
   <div class="well">
     <p><span class="glyphicon glyphicon-export"><p></p></span>Export Data</p>
-      <input type="radio" name="fileformat" value="csv" checked>.csv
-      <input type="radio" name="fileformat" value="xlxs"> .xlxs <br>
-      <button type="submit" class="w3-btn w3-ripple w3-blue">Export</button>
+      <input id="exportCSV" type="radio" name="fileformat" value="csv" checked>.csv
+      <input id="exportXLSX" type="radio" name="fileformat" value="xlsx"> .xlsx <br>
+      <button onclick="exportData()" type="submit" class="w3-btn w3-ripple w3-blue">Export</button>
   </div>
 
 </div>
