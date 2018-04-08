@@ -31,7 +31,7 @@
                 $.post('viewdata/addtag', data, function(data) {
                     if (data.results) {
                         toastr.success('Tag added successfully');
-                        $('#sidebar').append('<span id="' + $("#newTag").val().trim() +'" class="badge" draggable = "true" style="background-color:deepskyblue">' + $("#newTag").val().trim() +'<span onclick="removeTag($(this).parent())" class="glyphicon glyphicon-remove"></span></span>')
+                        $('#sidebar').append('<span id="' + $("#newTag").val().trim() +'" class="badge" draggable="true" ondragstart="drag(event)" style="background-color:deepskyblue">' + $("#newTag").val().trim() +'<span onclick="removeTag($(this).parent())" class="glyphicon glyphicon-remove"></span></span>')
                     }
                     else
                         toastr.error(data.message);
