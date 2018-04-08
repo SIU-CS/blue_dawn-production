@@ -16,12 +16,13 @@ from .models import DataSet
 from django.contrib.auth import login
 from django.contrib.sites.shortcuts import get_current_site
 from django.shortcuts import render, redirect
-from django.utils.encoding import force_bytes, force_text
+from django.utils.encoding import force_bytes, force_text, smart_str
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.template.loader import render_to_string
 from .form import RegistrationForm
 from .tokens import accountActivation
 from django.core.mail import EmailMessage
+from django.core.files import File
 from django.contrib.auth.decorators import login_required
 from pprint import pprint
 from django.http import JsonResponse
@@ -126,22 +127,23 @@ def viewdata(request):
     return render(request, 'viewdata.html', context)
 
 def addtag(request):
-	toreturn = dict()
-	try:
-		dataset = JSONDataSet.GetDataset(request.POST.get("id"))
+    toreturn = dict()
+    try:
+        dataset = JSONDataSet.GetDataset(request.POST.get("id"))
+        dataset.ExportXLSX()
 
-		if (dataset.HasTag(request.POST.get("tag"))):
-			toreturn['results'] = False
-			toreturn['message'] = "Tag already exists"
-		else:
-			dataset.AddTag(request.POST.get('tag'))
-			dataset.SaveDataset(request.user)
-			toreturn['results']=True
+        if (dataset.HasTag(request.POST.get("tag"))):
+            toreturn['results'] = False
+            toreturn['message'] = "Tag already exists"
+        else:
+            dataset.AddTag(request.POST.get('tag'))
+            dataset.SaveDataset(request.user)
+            toreturn['results']=True
 
-	except Exception as e:
-		toreturn['results']=False
-		toreturn['message']=str(e)
-	return JsonResponse(toreturn)
+    except Exception as e:
+        toreturn['results']=False
+        toreturn['message']=str(e)
+    return JsonResponse(toreturn)
 
 def TagItem(request):
     toreturn = dict()
@@ -160,6 +162,28 @@ def TagItem(request):
         toreturn['message'] = str(e)
     return JsonResponse(toreturn);
 
+def ExportCSV(request):
+    dataset = JSONDataSet.GetDataset(request.GET.get('id'))
+    dataset.ExportCSV()
+
+    file_name = dataset.json_dict['title'] + ".csv"
+    fpntr = File(open("media/tmp/" + file_name))
+
+    response = HttpResponse(fpntr, content_type="text/csv")
+    response['Content-Disposition'] = 'attachment; filename=%s' % smart_str(file_name)
+    return response
+
+def ExportXLSX(request):
+    dataset = JSONDataSet.GetDataset(request.GET.get('id'))
+    dataset.ExportXLSX()
+
+    file_name = dataset.json_dict['title'] + ".xlsx"
+    fpntr = File(open("media/tmp/" + file_name, 'rb'))
+
+    response = HttpResponse(fpntr, content_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+    response['Content-Disposition'] = 'attachment; filename=%s' % smart_str(file_name)
+
+    return response
 
 def removetag(request):
     toreturn = dict()

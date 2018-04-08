@@ -46,7 +46,9 @@ urlpatterns = [
     url(r'^logout/$', auth_views.logout, {'next_page': '/'}, name='logout'),
 	url(r'^viewdata/addtag$', views.addtag, name='addtag'),
 	url(r'^viewdata/removetag$', views.removetag, name='removetag'),
-    url(r'^viewdata/TagItem$', views.TagItem, name='TagItem')
+    url(r'^viewdata/TagItem$', views.TagItem, name='TagItem'),
+    url(r'^viewdata/ExportCSV$', views.ExportCSV, name='ExportCSV'),
+    url(r'^viewdata/ExportXLSX$', views.ExportXLSX, name='ExportXLSX')
 
 ]
 

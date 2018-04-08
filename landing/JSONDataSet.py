@@ -170,11 +170,18 @@ class JSONDataSet:
         self.json_dict['tags'] = tags
 
 
+    def ExportCSV(self):
+        with open("media/tmp/" + self.json_dict['title'] + ".csv", "w+") as fpntr:
+            writer = csv.writer(fpntr)
+            for elem in self.json_dict['data']:
+                writer.writerow([elem['question'], elem['answer'], *elem['tag']])
 
-    #TODO
-    def xml2csv(xml):
-        pass
+        return "media/tmp/" + self.json_dict['title'] + ".csv"
 
-    #TODO
-    def xml2xlsx(xml):
-        pass
+    def ExportXLSX(self):
+        wb = openpyxl.Workbook()
+        ws = wb.active
+        for elem in self.json_dict['data']:
+            ws.append([elem['question'], elem['answer'], *elem['tag']])
+        wb.save("media/tmp/" + self.json_dict['title'] + ".xlsx")
+        return "media/tmp/self.json_dict['title']" + ".xlsx"
