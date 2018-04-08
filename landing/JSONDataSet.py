@@ -169,8 +169,14 @@ class JSONDataSet:
         """
         self.json_dict['tags'] = tags
 
+    def _CheckPermission(self, user):
+        return DataSet.objects.get(id=self.id).user.id == user.id
 
-    def ExportCSV(self):
+
+    def ExportCSV(self, user):
+        if not self._CheckPermission(user):
+            return
+
         with open("media/tmp/" + self.json_dict['title'] + ".csv", "w+") as fpntr:
             writer = csv.writer(fpntr)
             for elem in self.json_dict['data']:
@@ -178,7 +184,10 @@ class JSONDataSet:
 
         return "media/tmp/" + self.json_dict['title'] + ".csv"
 
-    def ExportXLSX(self):
+    def ExportXLSX(self, user):
+        if not self._CheckPermission(user):
+            return
+
         wb = openpyxl.Workbook()
         ws = wb.active
         for elem in self.json_dict['data']:

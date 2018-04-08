@@ -164,24 +164,29 @@ def TagItem(request):
 
 def ExportCSV(request):
     dataset = JSONDataSet.GetDataset(request.GET.get('id'))
-    dataset.ExportCSV()
+    dataset.ExportCSV(request.user)
 
     file_name = dataset.json_dict['title'] + ".csv"
     fpntr = File(open("media/tmp/" + file_name))
 
     response = HttpResponse(fpntr, content_type="text/csv")
     response['Content-Disposition'] = 'attachment; filename=%s' % smart_str(file_name)
+
+    os.remove("media/tmp/" + file_name)
+    
     return response
 
 def ExportXLSX(request):
     dataset = JSONDataSet.GetDataset(request.GET.get('id'))
-    dataset.ExportXLSX()
+    dataset.ExportXLSX(request.user)
 
     file_name = dataset.json_dict['title'] + ".xlsx"
     fpntr = File(open("media/tmp/" + file_name, 'rb'))
 
     response = HttpResponse(fpntr, content_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
     response['Content-Disposition'] = 'attachment; filename=%s' % smart_str(file_name)
+
+    os.remove("media/tmp/" + file_name)
 
     return response
 
