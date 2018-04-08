@@ -55,12 +55,15 @@ class JSONDataSet:
             json_dict["title"] = name
             json_dict["description"] = description
 
+            identifier = 0
             for row in csv_data:
                 if len(row) == 0:
                     continue
                 if len(row) != 2:
                     raise InputException("Invalid format in csv file")
                 data_item = dict()
+                data_item["id"] = identifier
+                identifier += 1
                 data_item["question"] = row[0]
                 data_item["answer"] = row[1]
                 data_item["tag"] = list()
@@ -84,8 +87,11 @@ class JSONDataSet:
         json_dict["title"] = name
         json_dict["description"] = description
 
+        identifer = 0
         for i in range(min(len(xlxs_data['A']), len(xlxs_data['B']))):
             data_item = dict()
+            data_item["id"] = identifier
+            identifier += 1
             data_item["question"] = xlxs_data['A'][i].value
             data_item["answer"] = xlxs_data['B'][i].value
             data_item["tag"] = list()
@@ -141,6 +147,14 @@ class JSONDataSet:
     def RemoveTag(self, tag):
         while self.HasTag(tag):
             self.json_dict["tags"].remove(tag)
+
+    def TagItem(self, itemId, tags):
+        item = next(filter(lambda x: str(x['id']) == itemId, self.json_dict['data']))
+        item['tag'] = tags
+
+    def ItemHasTag(self, itemId, tag):
+        print("tag checkign: " + tag)
+        return tag in next(filter(lambda x: str(x['id']) == itemId, self.json_dict['data']))['tag']
 
     def HasTag(self, tag):
         return tag in self.json_dict["tags"]

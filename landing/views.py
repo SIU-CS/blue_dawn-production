@@ -109,21 +109,22 @@ def saveUploadedFile(fpntr):
 
 # display json data on a table
 def viewdata(request):
-	parameter = request.GET.get('dataset', '')
-	if (parameter != ""):
-		id = parameter.split('-', 1)[1]
-		data = JSONDataSet.GetDataset(id).json_dict['data']
-		tags = JSONDataSet.GetDataset(id).json_dict['tags']
-	else:
-		data = None
+    parameter = request.GET.get('dataset', '')
+    if (parameter != ""):
+        id = parameter.split('-', 1)[1]
+        data = JSONDataSet.GetDataset(id).json_dict['data']
+        tags = JSONDataSet.GetDataset(id).json_dict['tags']
+    else:
+        data = None
 
-	context = {
-		'data': data,
-		'tags': tags,
-		'id': id,
-	}
+    pprint(data)
+    context = {
+        'data': data,
+        'tags': tags,
+        'id': id,
+    }
 
-	return render(request, 'viewdata.html', context)
+    return render(request, 'viewdata.html', context)
 
 def addtag(request):
 	toreturn = dict()
@@ -143,6 +144,24 @@ def addtag(request):
 		toreturn['message']=str(e)
 	return JsonResponse(toreturn)
 
+def TagItem(request):
+    toreturn = dict()
+
+    try:
+        dataset = JSONDataSet.GetDataset(request.POST.get("datasetId"))
+        if (dataset.ItemHasTag(request.POST.get("itemId"), request.POST.getlist('tags[]')[-1])):
+            toreturn['result'] = False
+            toreturn['message'] = "Item already has that tag"
+        else:
+            dataset.TagItem(request.POST.get("itemId"), request.POST.getlist("tags[]"))
+            dataset.SaveDataset(request.user)
+            toreturn["result"] = True
+    except Exception as e:
+        toreturn['result'] = False
+        toreturn['message'] = str(e)
+    return JsonResponse(toreturn);
+
+
 def removetag(request):
     toreturn = dict()
     try:
@@ -153,7 +172,7 @@ def removetag(request):
     except Exception as e:
         toreturn['results'] = False
         toreturn['message'] = str(e)
-        
+
     return JsonResponse(toreturn)
 
 def signup(request):
