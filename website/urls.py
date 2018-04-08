@@ -45,7 +45,8 @@ urlpatterns = [
     url(r'^activation_complete/$', views.activation_complete, name= 'activation_complete'),
     url(r'^logout/$', auth_views.logout, {'next_page': '/'}, name='logout'),
 	url(r'^viewdata/addtag$', views.addtag, name='addtag'),
-	url(r'^viewdata/removetag$', views.removetag, name='removetag')
+	url(r'^viewdata/removetag$', views.removetag, name='removetag'),
+    url(r'^viewdata/TagItem$', views.TagItem, name='TagItem')
 
 ]
 
