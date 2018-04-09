@@ -180,7 +180,13 @@ class JSONDataSet:
         with open("media/tmp/" + self.json_dict['title'] + ".csv", "w+") as fpntr:
             writer = csv.writer(fpntr)
             for elem in self.json_dict['data']:
-                writer.writerow([elem['question'], elem['answer'], *elem['tag']])
+                row = [elem['question'], elem['answer']]
+                for tag in self.json_dict['tags']:
+                    if tag in elem['tag']:
+                        row.append(tag)
+                    else:
+                        row.append("")
+                writer.writerow(row)
 
         return "media/tmp/" + self.json_dict['title'] + ".csv"
 
@@ -191,6 +197,13 @@ class JSONDataSet:
         wb = openpyxl.Workbook()
         ws = wb.active
         for elem in self.json_dict['data']:
-            ws.append([elem['question'], elem['answer'], *elem['tag']])
+            row = [elem['question'], elem['answer']]
+            for tag in self.json_dict['tags']:
+                if tag in elem['tag']:
+                    row.append(tag)
+                else:
+                    row.append("")
+            ws.append(row)
+            
         wb.save("media/tmp/" + self.json_dict['title'] + ".xlsx")
         return "media/tmp/self.json_dict['title']" + ".xlsx"
