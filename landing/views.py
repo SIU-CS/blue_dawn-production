@@ -52,6 +52,7 @@ def profile(request):
 def wiki(request):
 	return render(request,'wiki.html')
 
+@login_required(login_url="/login")
 def importing(request):
 	form = FileForm(request.POST or None)
 	if request.method == 'POST':
@@ -109,6 +110,7 @@ def saveUploadedFile(fpntr):
 	return settings.MEDIA_ROOT + "/tmp/" + fpntr.name
 
 # display json data on a table
+@login_required(login_url="/login")
 def viewdata(request):
     parameter = request.GET.get('dataset', '')
     if (parameter != ""):
