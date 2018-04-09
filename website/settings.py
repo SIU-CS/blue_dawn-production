@@ -14,7 +14,7 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_HOST_USER = 'Ahmedalmutairi'
-EMAIL_HOST_PASSWORD = 'Ahmed@123'
+EMAIL_HOST_PASSWORD = 'Hanin@123'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
