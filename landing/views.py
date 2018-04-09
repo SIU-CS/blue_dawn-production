@@ -130,7 +130,6 @@ def addtag(request):
     toreturn = dict()
     try:
         dataset = JSONDataSet.GetDataset(request.POST.get("id"))
-        dataset.ExportXLSX()
 
         if (dataset.HasTag(request.POST.get("tag"))):
             toreturn['results'] = False
