@@ -10,7 +10,7 @@ from login.tokens import accountActivation
 from django.core.mail import EmailMessage
 
 def login(request):
-    return render(request, 'login.html')
+    return render(request, 'registration/login.html')
 
 
 def signup(request):

@@ -25,7 +25,6 @@ from django.contrib.auth import logout
 from home import views as home_views
 from importing import views as importing_views
 from login import views as login_views
-
 from tagging import views as tagging_views
 from templates import views as templates_views
 from userpage import views as userpage_views
