@@ -29,15 +29,15 @@
                 <div class="col-sm-8 text-left">
                     <h2>Import Data</h2>
                     <hr>
-					<form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
-						{% csrf_token %}
-						{{ form.as_p }}
-						<div class="form-group">
-							<div class="col-sm-offset-2 col-sm-10">
-								<button type="submit" class="w3-btn w3-ripple w3-blue">Import</button>
-							</div>
-						</div>
-					</form>
+                    <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="w3-btn w3-ripple w3-blue">Import</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
                 
                 {% include 'userSidebar-template.html' %}
