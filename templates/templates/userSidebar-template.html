@@ -1,9 +1,9 @@
 <script>
     function exportData() {
         if ($("#exportCSV").prop("checked")) {
-            location.replace("/viewdata/ExportCSV?id={{id}}");
+            location.replace("/tagging/ExportCSV?id={{id}}");
         } else {
-            location.replace("/viewdata/ExportXLSX?id={{id}}");
+            location.replace("/tagging/ExportXLSX?id={{id}}");
         }
     }
 </script>

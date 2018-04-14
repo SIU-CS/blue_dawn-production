@@ -29,7 +29,7 @@
                     'tag': $("#newTag").val().trim(),
                     'id': '{{id}}',
                 };
-                $.post('viewdata/addtag', data, function(data) {
+                $.post('addtag', data, function(data) {
                     if (data.results) {
                         toastr.success('Tag added successfully');
                         $('#sidebar').append('<span id="' + $("#newTag").val().trim() +'" class="badge" draggable="true" ondragstart="drag(event)" style="background-color:deepskyblue">' + $("#newTag").val().trim() +'<span onclick="removeTag($(this).parent())" class="glyphicon glyphicon-remove"></span></span>')
@@ -53,7 +53,7 @@
                     'id': '{{id}}',
                 };
 
-                $.post('viewdata/removetag', data, function(data) {
+                $.post('removetag', data, function(data) {
                     if (data.results) {
                         e.remove();
                         toastr.success('Tag removed successfully');
@@ -90,7 +90,7 @@
                     if (data.tags[i] == "") data.tags.splice(i, 1);
                 }
 
-                $.post('viewdata/TagItem', data, function(data) {
+                $.post('TagItem', data, function(data) {
                     if (data.result) {
                         toastr.success("Tag added successfully");
                         var comma = $("#" + id).html() == "" ? "" : ", ";
