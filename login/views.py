@@ -22,7 +22,7 @@ def signup(request):
             user.save()
             current_site = get_current_site(request)
             subject = 'Activate you account'
-            message = render_to_string('email_activation.html', {
+            message = render_to_string('registration/email_activation.html', {
                 'user': user,
                 'domain': current_site.domain,
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)).decode(),
@@ -40,7 +40,7 @@ def signup(request):
 
 
 def email_activation_sent(request):
-    return render(request, 'email_activation_sent.html')
+    return render(request, 'registration/email_activation_sent.html')
 
 
 def activate(request, uidb64, token):
