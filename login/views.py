@@ -61,4 +61,4 @@ def activate(request, uidb64, token):
 
 
 def activation_complete(request):
-    return render(request, 'activation_complete.html')
+    return render(request, 'registration/activation_complete.html')
