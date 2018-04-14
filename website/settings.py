@@ -39,7 +39,13 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-	'landing.apps.LandingConfig',
+	'home.apps.HomeConfig',
+	'importing.apps.ImportingConfig',
+	'login.apps.LoginConfig',
+	'tagging.apps.TaggingConfig',
+	'templates.apps.TemplatesConfig',
+	'userpage.apps.UserpageConfig',
+	'wiki.apps.WikiConfig',
 	'django.contrib.admin',
 	'django.contrib.auth',
 	'django.contrib.contenttypes',
