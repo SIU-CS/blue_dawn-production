@@ -12,9 +12,10 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'bluedawnanalysis@gmail.com'
-EMAIL_HOST_PASSWORD = 'ThisIsAVeryVeryVeryVeryVeryVeryVeryVerySuperSecureUltimatePasswordTHATISUNCRACKABLE'
+EMAIL_HOST_PASSWORD = ''
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
 
 import os
 
