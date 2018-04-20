@@ -12,15 +12,10 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 
 
 
-<<<<<<< HEAD
-EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_HOST_USER = 'Ahmedalmutairi'
-EMAIL_HOST_PASSWORD = 'Hanin@123'
-=======
+
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'bluedawnanalysis@gmail.com'
-EMAIL_HOST_PASSWORD = ''
->>>>>>> 339657b55b232d6d7c41be67a421697c8fb5e8b9
+EMAIL_HOST_PASSWORD = 'ThisIsAVeryVeryVeryVeryVeryVeryVeryVerySuperSecureUltimatePasswordTHATISUNCRACKABLE'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
@@ -94,7 +89,7 @@ DATABASES = {
 		'ENGINE': 'django.db.backends.mysql',
 		'NAME': 'BlueDawnAnalysis',
 		'USER': 'root',
-		'PASSWORD': 'Still @live!',
+		'PASSWORD': '',
 		'HOST': '',
 		'PORT': '',
 	}
