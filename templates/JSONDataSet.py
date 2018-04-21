@@ -47,27 +47,35 @@ class JSONDataSet:
             description (str): Description for the dataset
         """
         with open(filepath, newline='') as csv_file:
-            csv_data = csv.reader(csv_file)
+            csv_data = csv.reader(csv_file) # parse the file
+
+            # initialize the data structure
             json_dict = dict()
-            json_dict["tags"] = list()
-            json_dict["data"] = list()
+            json_dict['tags'] = list()
+            json_dict['data'] = dict()
+            json_dict['data']['questions'] = list()
+            json_dict['data']['responses'] = list()
+            json_dict['title'] = name
+            json_dict['description'] = description
 
-            json_dict["title"] = name
-            json_dict["description"] = description
-
-            identifier = 0
-            for row in csv_data:
-                if len(row) == 0:
-                    continue
-                if len(row) != 2:
-                    raise InputException("Invalid format in csv file")
-                data_item = dict()
-                data_item["id"] = identifier
-                identifier += 1
-                data_item["question"] = row[0]
-                data_item["answer"] = row[1]
-                data_item["tag"] = list()
-                json_dict["data"].append(data_item)
+            rid = 0
+            for i, row in enumerate(csv_data):
+                # first pass of for loop: first row of the csv
+                if i == 0:
+                    for qid, question in enumerate(row):
+                        temp = dict()
+                        temp['qid'] = qid
+                        temp['question'] = question
+                        json_dict['data']['questions'].append(temp)
+                else:
+                    for qid, response in enumerate(row):
+                        temp = dict()
+                        temp['rid'] = rid
+                        temp['qid'] = qid
+                        temp['response'] = response
+                        temp['tags'] = list()
+                        json_dict['data']['responses'].append(temp)
+                    rid += 1
 
             return json_dict
 
@@ -79,24 +87,35 @@ class JSONDataSet:
             name (str): Name of the dataset
             description (str): Description for the dataset
         """
-        xlxs_data = openpyxl.load_workbook(filepath).active
+        xlsx_data = openpyxl.load_workbook(filepath).active
+
+        # initialize the data structure
         json_dict = dict()
-        json_dict["tags"] = list()
-        json_dict["data"] = list()
+        json_dict['tags'] = list()
+        json_dict['data'] = dict()
+        json_dict['data']['questions'] = list()
+        json_dict['data']['responses'] = list()
+        json_dict['title'] = name
+        json_dict['description'] = description
 
-        json_dict["title"] = name
-        json_dict["description"] = description
-
-        identifier = 0
-        for i in range(min(len(xlxs_data['A']), len(xlxs_data['B']))):
-            data_item = dict()
-            data_item["id"] = identifier
-            identifier += 1
-            data_item["question"] = xlxs_data['A'][i].value
-            data_item["answer"] = xlxs_data['B'][i].value
-            data_item["tag"] = list()
-            json_dict["data"].append(data_item)
-
+        rid = 0
+        for row in range(1, xlsx_data.max_row + 1):
+            if row == 1: # first pass
+                for qid, question in enumerate(xlsx_data[str(row)]):
+                    temp = dict()
+                    temp['qid'] = qid
+                    temp['question'] = question.value
+                    json_dict['data']['questions'].append(temp)
+            else:
+                for qid, response in enumerate(xlsx_data[str(row)]):
+                    temp = dict()
+                    temp['rid'] = rid
+                    temp['qid'] = qid
+                    temp['response'] = response.value
+                    temp['tags'] = list()
+                    json_dict['data']['responses'].append(temp)
+                rid += 1
+        pprint(json_dict)
         return json_dict
 
     # write this dataset to the database
@@ -204,6 +223,6 @@ class JSONDataSet:
                 else:
                     row.append("")
             ws.append(row)
-            
+
         wb.save("media/tmp/" + self.json_dict['title'] + ".xlsx")
         return "media/tmp/self.json_dict['title']" + ".xlsx"
