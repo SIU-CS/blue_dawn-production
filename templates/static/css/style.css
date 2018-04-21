@@ -1,7 +1,12 @@
+.login-button, .login-button:hover{
+    margin-top: 9px;
+    background-color: #075e6d;
+    color: white;
+}
+
 .navbar{
     margin-bottom: : 0;
     border-radius: 0;
-
 }
 .row.content{
     height:450px;

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-dark bg-primary" style="background-color: #075e6d;">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -16,11 +16,21 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 {% if user.is_authenticated %}
-                <li><a href="{% url 'profile' %}"><span class="glyphicon glyphicon-log-in"> {{request.user.username}}</span></a></li>
+                <li>
+                    <div class="dropdown">
+                        <button class="btn dropdown-toggle login-button" type="button" data-toggle="dropdown">
+                            {{request.user.username}}
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="{% url 'profile' %}"><span class="glyphicon glyphicon-user"> User-page</span></a></li>
+                            <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out"> Logout</span></a></li>
+                        </ul>
+                    </div>
+                </li>
                 {% else %}
                 <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"> Login</span></a></li>
                 {% endif %}
-                <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out"> Logout</span></a></li>
             </ul>
         </div>
     </div>
