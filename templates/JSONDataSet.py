@@ -55,6 +55,7 @@ class JSONDataSet:
             json_dict['data'] = dict()
             json_dict['data']['questions'] = list()
             json_dict['data']['responses'] = list()
+            json_dict['data']['tags'] = list()
             json_dict['title'] = name
             json_dict['description'] = description
 
@@ -73,8 +74,9 @@ class JSONDataSet:
                         temp['rid'] = rid
                         temp['qid'] = qid
                         temp['response'] = response
-                        temp['tags'] = list()
                         json_dict['data']['responses'].append(temp)
+                        if len(list(filter(lambda x: x['rid'] == rid, json_dict['data']['tags']))) == 0:
+                            json_dict['data']['tags'].append({'rid': rid, 'tags': list()})
                     rid += 1
 
             return json_dict
@@ -95,6 +97,7 @@ class JSONDataSet:
         json_dict['data'] = dict()
         json_dict['data']['questions'] = list()
         json_dict['data']['responses'] = list()
+        json_dict['data']['tags'] = list()
         json_dict['title'] = name
         json_dict['description'] = description
 
@@ -112,8 +115,9 @@ class JSONDataSet:
                     temp['rid'] = rid
                     temp['qid'] = qid
                     temp['response'] = response.value
-                    temp['tags'] = list()
                     json_dict['data']['responses'].append(temp)
+                    if len(list(filter(lambda x: x['rid'] == rid, json_dict['data']['tags']))) == 0:
+                        json_dict['data']['tags'].append({'rid': rid, 'tags': list()})
                 rid += 1
         pprint(json_dict)
         return json_dict
@@ -169,11 +173,11 @@ class JSONDataSet:
         #TODO: Remove instances of the tag in items
 
     def TagItem(self, rid, tags):
-        item = next(filter(lambda x: str(x['rid'] == rid, self.json_dict['responses'])))
+        item = next(filter(lambda x: str(x['rid']) == rid, self.json_dict['data']['tags']), dict())
         item['tags'] = tags
 
     def ItemHasTag(self, rid, tag):
-        return tag in next(filter(lambda x: str(x['rid'] == rid, self.json_dict['responses'])))['tags']
+        return tag in next(filter(lambda x: str(x['rid']) == rid, self.json_dict['data']['tags']), dict()).get('tags', list())
 
     def HasTag(self, tag):
         return tag in self.json_dict["tags"]

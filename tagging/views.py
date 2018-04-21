@@ -5,6 +5,7 @@ from django.http import JsonResponse
 from django.core.files import File
 from django.http import HttpResponse
 from django.utils.encoding import smart_str
+from pprint import pprint
 import os
 
 # display json data on a table
@@ -18,8 +19,17 @@ def viewdata(request):
     else:
         data = None
 
+    matrix = [[None for i in range(len(data['questions']))] for j in range(int(len(data['responses'])/len(data['questions'])))]
+    for response in data['responses']:
+        response['tags'] = next(filter(lambda x: x['rid'] == response['rid'], data['tags']), dict()).get('tags', list())
+        matrix[response['rid']][response['qid']] = response
+
+    questions = [question['question'] for question in data['questions'] ]
+
+    pprint(matrix)
     context = {
-        'data': data,
+        'data': matrix,
+        'questions': questions,
         'tags': tags,
         'id': id,
     }
@@ -46,14 +56,13 @@ def addtag(request):
 
 def TagItem(request):
     toreturn = dict()
-
     try:
         dataset = JSONDataSet.GetDataset(request.POST.get("datasetId"))
-        if (dataset.ItemHasTag(request.POST.get("itemId"), request.POST.getlist('tags[]')[-1])):
+        if (dataset.ItemHasTag(request.POST.get("rid"), request.POST.getlist('tags[]')[-1])):
             toreturn['result'] = False
             toreturn['message'] = "Item already has that tag"
         else:
-            dataset.TagItem(request.POST.get("itemId"), request.POST.getlist("tags[]"))
+            dataset.TagItem(request.POST.get("rid"), request.POST.getlist("tags[]"))
             dataset.SaveDataset(request.user)
             toreturn["result"] = True
     except Exception as e:

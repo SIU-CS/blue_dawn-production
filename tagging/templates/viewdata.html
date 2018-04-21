@@ -79,7 +79,7 @@
 
                 var data = {
                     'csrfmiddlewaretoken': '{{csrf_token}}',
-                    'itemId': id.split("-")[id.split("-").length-1],
+                    'rid': id.split("-")[id.split("-").length-1],
                     'datasetId': '{{id}}',
                     'tags': $("#" + id).html().split(","),
                 };
@@ -133,23 +133,24 @@
                 <div class="col-sm-8 text-left">
                     <h2> View Data</h2>
                     <hr>
-                    <table border="1" id="userData">
+                    <table id="userData" border="1">
                         <thead>
                             <tr>
-                                <th>Question</th>
-                                <th>Answer</th>
-                                <th>Tags</th>
+                                <td>Question</td>
+                                {% for question in questions %}
+                                <td>{{question}}</td>
+                                {% endfor %}
+                                <td>Tags</td>
                             </tr>
                         </thead>
-                        <tbody>
-                            {% for item in data %}
-                            <tr>
-                                <td>{{item.question}}</td>
-                                <td>{{item.answer}}</td>
-                                <td id='item-{{item.id}}' ondrop="drop(event)" ondragover="allowDrop(event)">{% for tags in item.tag %}{{tags}}{% if forloop.last is False and item.tag|length > 1 %}, {% endif %}{% endfor %}</td>
-                            </tr>
+                        {% for row in data %}
+                        <tr>
+                            <td>Response</td>
+                            {% for response in row %}
+                            <td>{{response.response}}</td>
                             {% endfor %}
-                        </tbody>
+                            <td id='rid-{{row.0.rid}}' ondrop="drop(event)" ondragover="allowDrop(event)">{% for tags in row.0.tags %}{{tags}}{% if forloop.last is False and row.0.tags|length > 1 %}, {% endif %}{% endfor %}</td>
+                        {% endfor %}
                     </table>
                 </div>
 
