@@ -203,13 +203,22 @@ class JSONDataSet:
 
         with open("media/tmp/" + self.json_dict['title'] + ".csv", "w+") as fpntr:
             writer = csv.writer(fpntr)
-            for elem in self.json_dict['data']:
-                row = [elem['question'], elem['answer']]
+            row = [x['question'] for x in self.json_dict['data']['questions']]
+            row += self.json_dict['tags'] # concatenate the lists
+            writer.writerow(row)
+
+            matrix = [[None for i in range(len(self.json_dict['data']['questions']))] for j in range(int(len(self.json_dict['data']['responses'])/len(self.json_dict['data']['questions'])))]
+
+            for response in self.json_dict['data']['responses']:
+                matrix[response['rid']][response['qid']] = response
+
+            for row in matrix:
+                tags = next(filter(lambda x: x['rid'] == row[0]['rid'], self.json_dict['data']['tags']))['tags']
+                tags_to_append = list()
                 for tag in self.json_dict['tags']:
-                    if tag in elem['tag']:
-                        row.append(tag)
-                    else:
-                        row.append("")
+                    print("tags:")
+                    tags_to_append.append(1 if tag in tags else 0)
+                row = [x['response'] for x in row] + tags_to_append
                 writer.writerow(row)
 
         return "media/tmp/" + self.json_dict['title'] + ".csv"
@@ -220,13 +229,23 @@ class JSONDataSet:
 
         wb = openpyxl.Workbook()
         ws = wb.active
-        for elem in self.json_dict['data']:
-            row = [elem['question'], elem['answer']]
+
+        row = [x['question'] for x in self.json_dict['data']['questions']]
+        row += self.json_dict['tags'] # concatenate the lists
+        ws.append(row)
+
+        matrix = [[None for i in range(len(self.json_dict['data']['questions']))] for j in range(int(len(self.json_dict['data']['responses'])/len(self.json_dict['data']['questions'])))]
+
+        for response in self.json_dict['data']['responses']:
+            matrix[response['rid']][response['qid']] = response
+
+        for row in matrix:
+            tags = next(filter(lambda x: x['rid'] == row[0]['rid'], self.json_dict['data']['tags']))['tags']
+            tags_to_append = list()
             for tag in self.json_dict['tags']:
-                if tag in elem['tag']:
-                    row.append(tag)
-                else:
-                    row.append("")
+                print("tags:")
+                tags_to_append.append(1 if tag in tags else 0)
+            row = [x['response'] for x in row] + tags_to_append
             ws.append(row)
 
         wb.save("media/tmp/" + self.json_dict['title'] + ".xlsx")

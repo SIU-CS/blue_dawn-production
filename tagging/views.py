@@ -26,7 +26,6 @@ def viewdata(request):
 
     questions = [question['question'] for question in data['questions'] ]
 
-    pprint(matrix)
     context = {
         'data': matrix,
         'questions': questions,
