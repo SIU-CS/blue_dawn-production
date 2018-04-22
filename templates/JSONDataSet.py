@@ -169,7 +169,9 @@ class JSONDataSet:
     def RemoveTag(self, tag):
         while self.HasTag(tag):
             self.json_dict["tags"].remove(tag)
-        #TODO: Remove instances of the tag in items
+        for response_tags in self.json_dict['data']['tags']:
+            if (tag in response_tags['tags']):
+                response_tags['tags'].remove(tag)
 
     def TagItem(self, rid, tags):
         item = next(filter(lambda x: str(x['rid']) == rid, self.json_dict['data']['tags']), dict())
@@ -177,6 +179,11 @@ class JSONDataSet:
 
     def ItemHasTag(self, rid, tag):
         return tag in next(filter(lambda x: str(x['rid']) == rid, self.json_dict['data']['tags']), dict()).get('tags', list())
+
+    def RemoveItemTag(self, rid, tag):
+        item = next(filter(lambda x: str(x['rid']) == rid, self.json_dict['data']['tags']), dict())
+        if (tag in item['tags']):
+            item['tags'].remove(tag)
 
     def HasTag(self, tag):
         return tag in self.json_dict["tags"]
