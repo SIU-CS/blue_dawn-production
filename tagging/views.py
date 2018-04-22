@@ -14,22 +14,14 @@ def viewdata(request):
     parameter = request.GET.get('dataset', '')
     if (parameter != ""):
         id = parameter.split('-', 1)[1]
-        data = JSONDataSet.GetDataset(id).json_dict['data']
-        tags = JSONDataSet.GetDataset(id).json_dict['tags']
+        dataset = JSONDataSet.GetDataset(id)
     else:
-        data = None
-
-    matrix = [[None for i in range(len(data['questions']))] for j in range(int(len(data['responses'])/len(data['questions'])))]
-    for response in data['responses']:
-        response['tags'] = next(filter(lambda x: x['rid'] == response['rid'], data['tags']), dict()).get('tags', list())
-        matrix[response['rid']][response['qid']] = response
-
-    questions = [question['question'] for question in data['questions'] ]
+        return render(request,'index.html')
 
     context = {
-        'data': matrix,
-        'questions': questions,
-        'tags': tags,
+        'data': dataset.GetResponseMatrix(),
+        'questions': dataset.GetQuestions(),
+        'tags': dataset.GetTags(),
         'id': id,
     }
 

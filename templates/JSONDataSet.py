@@ -226,6 +226,18 @@ class JSONDataSet:
             tags (list<str>): List of tags to be set to this dataset"""
         self.json_dict['tags'] = tags
 
+    def GetQuestions(self):
+        """ Get the list of questions in this DataSet
+        Returns:
+            list<str>: List of questions"""
+        return [question['question'] for question in self.json_dict['data']['questions']]
+
+    def GetTags(self):
+        """ Get the list of global tags in the DataSet
+        Returns:
+            list<str>: List of tags"""
+        return self.json_dict['tags']
+
     def _CheckPermission(self, user):
         """ Check if a requesting user has permission to use this DataSet
         Args:
@@ -250,8 +262,6 @@ class JSONDataSet:
             # add the values to the matrix
             matrix[response['rid']][response['qid']] = response
             matrix[response['rid']][response['qid']]['tags'] = next(filter(lambda x: x['rid'] == response['rid'], self.json_dict['data']['tags']), dict()).get('tags', list())
-            #matrix[response['rid']][response['qid']]['tags'] = self._GetTagObject(response['rid']).get('tags', list())
-        pprint(matrix)
         return matrix
 
 
