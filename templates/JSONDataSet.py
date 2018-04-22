@@ -119,7 +119,6 @@ class JSONDataSet:
                     if len(list(filter(lambda x: x['rid'] == rid, json_dict['data']['tags']))) == 0:
                         json_dict['data']['tags'].append({'rid': rid, 'tags': list()})
                 rid += 1
-        pprint(json_dict)
         return json_dict
 
     # write this dataset to the database
