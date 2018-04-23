@@ -1,0 +1,75 @@
+Accounts
+Setting Up an Account
+    Setting up an account is pretty simple: 
+1.	Go to the sign up page <insert hyperlink to signup page> or go to the login page <hyperlink login here>, and click the text that says “Sign Up” in the middle of the screen.  
+2.	Provide a username.  It must be unique from other usernames on the site.
+3.	Provide an email address.  This is used for account activation and for resetting the account password, so it must be one you can access.
+4.	Choose a password.  It cannot be all numbers, less than eight characters, too close to the username, or too common (such as “Password”).  For choosing a good password, this is a good resource <insert hyperlink to good password website>
+5.	Confirm the password.
+6.	Press the pretty blue “Sign Up” button.
+7.	Go to the email address you provided.  You should have an email from us with an activation link.
+8.	If an email does not appear within a reasonable amount of time, please make sure you provided the correct email address and check your junk mail
+9.	Once you receive the email, press the link and your account will be set up!
+10.	Now simply click on the blue “Log in” button to proceed to logging in.
+
+Logging In
+    Logging in to the site is very straightforward:
+1.	Go to the login page <insert hyperlink>.
+2.	Enter your username and password and press the “Login” button.
+3.	You may check the “Remember me” box if you would like to reduce the number of times you need to log in to your account.  Be aware that this will store your login information as a cookie <link to cookie page>.
+
+Resetting Password
+    If you have forgotten your password, or if you simply wish to change your old password these steps will get you back into your account in no time!
+1.	Go to the login page <link to login>.
+2.	Click the text “Forgot your password” located toward the bottom of the page.  This will take you to a page where you will need to enter the email address you used to set up the account.  
+3.	Provide the appropriate email address in the text box and press “Submit”.  This will send an email to the provided account with a link for resetting your password.
+4.	Go to your email account and open the link provided.
+5.	On the webpage, enter a new password and confirm the password.
+6.	Click the “Reset Password” button.
+7.	Your account password should now be updated!  You can now proceed to logging in.
+
+Importing a Dataset
+    Importing a dataset is a simple task:
+1.	Log in to your account if you are not already logged in.
+2.	Click on the “Import Data” button on the right sidebar.  This will take you to the importing page.
+3.	Provide a name for the dataset in the top text field.
+4.	Provide a short description of the dataset in the large text area.
+5.	Click on the “Browse” button below the description field to open your default file explorer.
+6.	Select the file you would like to import.  Our site currently accepts .xlsx and .csv files.
+7.	When you are ready, press the blue “Import” button to import the selected file.
+8.	You have now successfully imported your data!  You can now select this dataset for tagging or exporting.
+
+Selecting a Dataset
+	To select an imported dataset:
+1.	Log in to your account if you are not already logged in.
+2.	Go to your userpage <insert link to userpage here>.
+3.	At the top should be your username with a list of all imported datasets below it.
+4.	To select a dataset for use, click on its name in the list.  This will take you to the tagging page for this dataset.
+
+Deleting a Dataset
+	To remove an imported dataset from your account:
+1.	Log in to your account if you are not already logged in.
+2.	Go to your user page <insert link to userpage>.
+3.	Find the dataset you wish to remove from the list of imported datasets.
+4.	Press the “X” button next to the dataset’s name to remove it from your account.
+
+Tagging a Dataset
+Creating Tags
+    To create a tag to use on your dataset:
+1.	Log in <insert link to login page> to your account if you are not already logged in.
+2.	Navigate to your user page <insert link to user page>.
+3.	Select the dataset you want to create a tag for.
+4.	On the Dataset page, enter the text for the tag in the large text area in the upper left corner.
+5.	Click the “+ Add” button to add the tag.
+6.	You can now use this tag on this dataset.
+
+	Deleting Tags
+	Adding Tags to a Response
+	Removing Tags from a Response
+
+Exporting a Dataset
+Hosting
+	Installing the Server on Linux
+	Installing the Server on Windows
+	Installing the Server on Mac
+	
