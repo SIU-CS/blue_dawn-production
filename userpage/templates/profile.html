@@ -15,6 +15,12 @@
             $(document).ready( function () {
                 $('#exporting').hide();
             });
+
+            $(document).ready(function (){
+                $('#deleting').hide();
+            });
+
+
         </script>
 
         <style>
@@ -38,7 +44,11 @@
                     <table>
                         {% for item in data %}
                         <tr>
-                            <td onclick="location.href='{% url 'viewdata' %}?dataset=' + id" id='data-{{item.id}}'>{{item.name}}</td>
+                            <td onclick="location.href='{% url 'viewdata' %}?dataset=' + id" id='data-{{item.id}}'>{{item.name}} 
+                                <div class="deletingbutton">
+                                    <button onclick="deleteData()" type="submit" class="w3-btn w3-ripple w3-blue"> Delete </button>
+                                </div>
+                            </td>
                         </tr>
                         {% endfor %}
                     </table>

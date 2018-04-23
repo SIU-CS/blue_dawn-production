@@ -6,6 +6,16 @@
             location.replace("/tagging/ExportXLSX?id={{id}}");
         }
     }
+
+    function deleteData() {
+        if(confirm("Are you sure you want to delete this DataSet?")){
+          location.replace("/tagging/DeleteDataSet?id={{id}}");
+          alert("DataSet is Deleted successfully");
+        }
+        else{
+          return false;
+        }
+    }
 </script>
 
 <div class="col-sm-2 sidenav">
@@ -21,5 +31,11 @@
       <input id="exportXLSX" type="radio" name="fileformat" value="xlsx"> .xlsx <br>
       <button onclick="exportData()" type="submit" class="w3-btn w3-ripple w3-blue">Export</button>
   </div>
+
+  <div class="well" id="deleting">
+    <p><span class="glyphicon glyphicon-trash"><p></p></span>Delete Data</p>
+    <button onclick="deleteData()" type="submit" class="w3-btn w3-ripple w3-blue">Delete</button>
+  </div>
+  
 
 </div>

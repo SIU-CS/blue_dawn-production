@@ -129,3 +129,8 @@ tr:nth-child(even){
 .closeIcon{
     float: right;
 }
+
+.deletingbutton:hover input[type="submit"]
+{
+    visibility:visible !important;
+}

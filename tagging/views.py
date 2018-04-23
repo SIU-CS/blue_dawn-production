@@ -102,3 +102,14 @@ def ExportXLSX(request):
     os.remove("media/tmp/" + file_name)
 
     return response
+
+def DeleteDataSet(request):
+    dataset = JSONDataSet.GetDataset(request.GET.get('id'))
+    dataset.DeleteDataSet(request.user)
+    username = request.user.username
+    #return render(request, '.html')
+    #return JsonResponse(toreturn)
+    return render(request, 'profile.html', {"username": username})
+
+
+
