@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from templates.JSONDataSet import JSONDataSet
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
@@ -107,9 +107,8 @@ def DeleteDataSet(request):
     dataset = JSONDataSet.GetDataset(request.GET.get('id'))
     dataset.DeleteDataSet(request.user)
     username = request.user.username
-    #return render(request, '.html')
-    #return JsonResponse(toreturn)
-    return render(request, 'profile.html', {"username": username})
+    
+    return redirect('http://127.0.0.1:8000/userpage/')
 
 
 

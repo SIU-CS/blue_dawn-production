@@ -130,7 +130,3 @@ tr:nth-child(even){
     float: right;
 }
 
-.deletingbutton:hover input[type="submit"]
-{
-    visibility:visible !important;
-}

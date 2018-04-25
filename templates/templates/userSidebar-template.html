@@ -1,3 +1,6 @@
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 <script>
     function exportData() {
         if ($("#exportCSV").prop("checked")) {
@@ -8,13 +11,21 @@
     }
 
     function deleteData() {
-        if(confirm("Are you sure you want to delete this DataSet?")){
-          location.replace("/tagging/DeleteDataSet?id={{id}}");
-          alert("DataSet is Deleted successfully");
-        }
-        else{
-          return false;
-        }
+        event.cancelBubble = true;
+        if(event.stopPropagation) event.stopPropagation();
+        $.confirm({
+          title: 'Confirm Deleting!',
+          content: 'Are you sure you want to delete this DataSet?',
+          buttons: {
+            confirm: function () {
+                  location.replace("/tagging/DeleteDataSet?id={{id}}");
+                  $.alert('Confirmed!');
+            },
+            cancel: function () {
+                  $.alert('Canceled!');
+            },
+          }
+        });
     }
 </script>
 

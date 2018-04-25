@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from templates.JSONDataSet import JSONDataSet
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
+from django.utils.encoding import smart_str
 
 @login_required(login_url="/login")
 def profile(request):
@@ -16,3 +18,14 @@ def profile(request):
         data.append(temp)
 
     return render(request,'profile.html', {"data": data, "username": username})
+
+def deleteData(request):
+    toreturn = dict()
+
+    dataset = JSONDataSet.GetDataset(request.POST.get("itemId"))
+    dataset.DeleteDataSet(request.user)
+    toreturn["results"] = True
+    username = request.user.username
+
+    return JsonResponse(toreturn)
+
