@@ -25,7 +25,6 @@ def deleteData(request):
     dataset = JSONDataSet.GetDataset(request.POST.get("itemId"))
     dataset.DeleteDataSet(request.user)
     toreturn["results"] = True
-    username = request.user.username
-
+    
     return JsonResponse(toreturn)
 

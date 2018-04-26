@@ -87,7 +87,7 @@
                         <tr>
                             <td onclick="location.href='{% url 'viewdata' %}?dataset=' + id" id='data-{{item.id}}' class="deletingbutton">{{item.name}} 
                                     <div class="deletebtn text-right">
-                                        <button id='{{item.id}}' onclick="deleteDataSet(event)" type="submit" class="w3-btn w3-ripple w3-blue " > <p><span class="glyphicon glyphicon-trash"></span></p> </button> 
+                                        <button id='{{item.id}}' onclick="deleteDataSet(event)" type="button" class="w3-btn w3-ripple w3-blue " > <p><span class="glyphicon glyphicon-trash"></span></p> </button> 
                                     </div>
                             </td>
                         </tr>

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from templates.form import FileForm
 from django.core.files.storage import default_storage
@@ -49,7 +49,7 @@ def importing(request):
                 temp['name'] = d.json_dict["title"]
                 data.append(temp)
 
-            return render(request,'profile.html', {"data": data, "username": username})
+            return redirect('http://127.0.0.1:8000/userpage/')
 
     return render(request, 'importing.html', { 'form': form })
 
