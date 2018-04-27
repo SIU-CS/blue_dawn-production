@@ -5,6 +5,7 @@ from django.http import JsonResponse
 from django.core.files import File
 from django.http import HttpResponse
 from django.utils.encoding import smart_str
+from pprint import pprint
 import os
 
 # display json data on a table
@@ -13,14 +14,14 @@ def viewdata(request):
     parameter = request.GET.get('dataset', '')
     if (parameter != ""):
         id = parameter.split('-', 1)[1]
-        data = JSONDataSet.GetDataset(id).json_dict['data']
-        tags = JSONDataSet.GetDataset(id).json_dict['tags']
+        dataset = JSONDataSet.GetDataset(id)
     else:
-        data = None
+        return render(request,'index.html')
 
     context = {
-        'data': data,
-        'tags': tags,
+        'data': dataset.GetResponseMatrix(),
+        'questions': dataset.GetQuestions(),
+        'tags': dataset.GetTags(),
         'id': id,
     }
 
@@ -46,14 +47,13 @@ def addtag(request):
 
 def TagItem(request):
     toreturn = dict()
-
     try:
         dataset = JSONDataSet.GetDataset(request.POST.get("datasetId"))
-        if (dataset.ItemHasTag(request.POST.get("itemId"), request.POST.getlist('tags[]')[-1])):
+        if (dataset.ItemHasTag(request.POST.get("rid"), request.POST.getlist('tags[]')[-1])):
             toreturn['result'] = False
             toreturn['message'] = "Item already has that tag"
         else:
-            dataset.TagItem(request.POST.get("itemId"), request.POST.getlist("tags[]"))
+            dataset.TagItem(request.POST.get("rid"), request.POST.getlist("tags[]"))
             dataset.SaveDataset(request.user)
             toreturn["result"] = True
     except Exception as e:
