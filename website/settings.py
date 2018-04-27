@@ -39,6 +39,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'colSelect.apps.ColselectConfig',
     'home.apps.HomeConfig',
     'importing.apps.ImportingConfig',
     'login.apps.LoginConfig',
