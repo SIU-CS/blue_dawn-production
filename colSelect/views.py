@@ -1,4 +1,5 @@
 from django.shortcuts import render
 
 def colSelect(request):
-        return render(request,'colSelect.html')
+    
+    return render(request,'colSelect.html')

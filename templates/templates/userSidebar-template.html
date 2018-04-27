@@ -36,6 +36,9 @@
   <div class="well">
       <a href ="{% url 'importing' %}"><p><span class="glyphicon glyphicon-import"><p></p></span> Import Data</p></a>
   </div>
+  <div class="well" id="colSelect">
+      <a href ="{% url 'colSelect' %}"><p><span class="glyphicon glyphicon-import"><p></p></span> Column Select</p></a>
+  </div>
   <div class="well" id="exporting">
     <p><span class="glyphicon glyphicon-export"><p></p></span>Export Data</p>
       <input id="exportCSV" type="radio" name="fileformat" value="csv" checked>.csv
@@ -47,6 +50,6 @@
     <p><span class="glyphicon glyphicon-trash"><p></p></span>Delete Data</p>
     <button onclick="deleteData()" type="submit" class="w3-btn w3-ripple w3-blue">Delete</button>
   </div>
-  
+
 
 </div>
