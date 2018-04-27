@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from templates.JSONDataSet import JSONDataSet
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
@@ -102,3 +102,13 @@ def ExportXLSX(request):
     os.remove("media/tmp/" + file_name)
 
     return response
+
+def DeleteDataSet(request):
+    dataset = JSONDataSet.GetDataset(request.GET.get('id'))
+    dataset.DeleteDataSet(request.user)
+    username = request.user.username
+    
+    return redirect('http://127.0.0.1:8000/userpage/')
+
+
+

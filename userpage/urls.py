@@ -23,6 +23,7 @@ from userpage import views
 
 urlpatterns = [
     url(r'^$', views.profile, name='profile'),
+    url(r'^deleteData$', views.deleteData, name='deleteData'),
 ]
 
 if settings.DEBUG:

@@ -336,3 +336,10 @@ class JSONDataSet:
         # save and return
         wb.save("media/tmp/" + self.json_dict['title'] + ".xlsx")
         return "media/tmp/self.json_dict['title']" + ".xlsx"
+
+    def DeleteDataSet(self, user):
+        if not self._CheckPermission(user):
+            return
+
+        dataset = DataSet.objects.get(id=self.id)
+        dataset.delete()

@@ -10,11 +10,58 @@
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" integrity="sha256-ENFZrbVzylNbgnXx0n3I1g//2WeO47XxoPe0vkp3NC8=" crossorigin="anonymous" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha256-3blsJd4Hli/7wCQ+bmgXfOdK7p/ZUMtPXY08jmxSSgk=" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 
         <script>
             $(document).ready( function () {
                 $('#exporting').hide();
             });
+
+            $(document).ready(function (){
+                $('#deleting').hide();
+            });
+
+            $(function () {
+                $(".deletebtn").hide();
+                $(".deletingbutton").mouseleave(function () { $(".deletebtn").hide(); }).mouseenter(function () { $(".deletebtn").show(); }); 
+            });
+
+            function deleteDataSet(ev) {
+                ev.preventDefault();
+                var id = $(ev.target).attr("id");
+                event.cancelBubble = true;
+                if(event.stopPropagation) event.stopPropagation();
+                var data = {
+                    'itemId': id,
+                    'csrfmiddlewaretoken': '{{csrf_token}}',
+                };
+
+                $.confirm({
+                    title: 'Confirm Deleting!',
+                    content: 'Are you sure you want to delete this DataSet?',
+                    buttons: {
+                        confirm: function () {
+                            $.post('deleteData', data, function(data) {
+                                //$.alert(id);
+                                location.reload();
+                                //toastr.success("DataSet deleted successfully");
+                            });
+                            //$.alert('Confirmed!');
+                        },
+                        cancel: function () {
+                            $.alert('Canceled!');
+                        },
+                    }
+                });
+
+            }
+
+
+
+
         </script>
 
         <style>
@@ -38,7 +85,11 @@
                     <table>
                         {% for item in data %}
                         <tr>
-                            <td onclick="location.href='{% url 'viewdata' %}?dataset=' + id" id='data-{{item.id}}'>{{item.name}}</td>
+                            <td onclick="location.href='{% url 'viewdata' %}?dataset=' + id" id='data-{{item.id}}' class="deletingbutton">{{item.name}} 
+                                    <div class="deletebtn text-right">
+                                        <button id='{{item.id}}' onclick="deleteDataSet(event)" type="button" class="w3-btn w3-ripple w3-blue " > <p><span class="glyphicon glyphicon-trash"></span></p> </button> 
+                                    </div>
+                            </td>
                         </tr>
                         {% endfor %}
                     </table>
