@@ -136,7 +136,6 @@
                     <table id="userData" border="1">
                         <thead>
                             <tr>
-                                <td>Question</td>
                                 {% for question in questions %}
                                 <td>{{question}}</td>
                                 {% endfor %}
@@ -145,7 +144,6 @@
                         </thead>
                         {% for row in data %}
                         <tr>
-                            <td>Response</td>
                             {% for response in row %}
                             <td>{{response.response}}</td>
                             {% endfor %}
