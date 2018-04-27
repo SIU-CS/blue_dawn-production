@@ -1,0 +1,55 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Blue Dawn Analysis</title>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel ="stylesheet" href="{% static 'css/style.css' %}">
+        <link href="{% static 'css/multi-select.css' %}" media="screen" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" integrity="sha256-ENFZrbVzylNbgnXx0n3I1g//2WeO47XxoPe0vkp3NC8=" crossorigin="anonymous" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha256-3blsJd4Hli/7wCQ+bmgXfOdK7p/ZUMtPXY08jmxSSgk=" crossorigin="anonymous"></script>
+        <script>
+          $(document).ready( function () {
+            $('#my-select').multiSelect();
+          });
+        </script>
+    </head>
+    <body>
+        {% include 'topBar-template.html' %}
+
+        <div class="container-fluid text-center">
+            <div class="row content">
+                <div class="col-sm-2 sidenav">
+
+                </div>
+                <div class="col-sm-8 text-left">
+                    <h2>Select Columns to use</h2>
+                    <!--This is where the js multiselect should go-->
+                    <select multiple="multiple" id="my-select" name="my-select[]">
+                        {% for item in data %}
+                            <option value='{{item.question}}'>{{item.question}}</option>
+                        {% endfor %}
+                    </select>
+                    <script src="{% static 'js/jquery.multi-select.js' %}" type="text/javascript"></script>
+                </div>
+
+                {% include 'userSidebar-template.html' %}
+            </div>
+
+        </div>
+
+    <footer class="container-fluid text-center">
+        {% include 'footerTemplate.html' %}
+    </footer>
+</body>
+</html>
