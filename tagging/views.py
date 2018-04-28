@@ -36,9 +36,13 @@ def addtag(request):
             toreturn['results'] = False
             toreturn['message'] = "Tag already exists"
         else:
-            dataset.AddTag(request.POST.get('tag'))
-            dataset.SaveDataset(request.user)
-            toreturn['results']=True
+            if (request.POST.get('tag') == ""):
+                toreturn['results'] = False
+                toreturn['message'] = "Tag cannot be empty"
+            else:
+                dataset.AddTag(request.POST.get('tag'))
+                dataset.SaveDataset(request.user)
+                toreturn['results']=True
 
     except Exception as e:
         toreturn['results']=False
