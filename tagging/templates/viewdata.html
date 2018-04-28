@@ -33,7 +33,7 @@
                 $.post('addtag', data, function(data) {
                     if (data.results) {
                         toastr.success('Tag added successfully');
-                        $('#sidebar').append('<div id="' + $("#newTag").val().trim() +'" class="badge wordwrap" draggable="true" ondragstart="drag(event)" style="background-color:deepskyblue">' + $("#newTag").val().trim() +'<div onclick="removeTag($(this).parent())" class="glyphicon glyphicon-remove closeIcon"></div></div>')
+                        $('#sidebar').append('<div data-tag="' + $("#newTag").val().trim() + '" id="' + $("#newTag").val().trim() +'" class="badge wordwrap" draggable="true" ondragstart="drag(event)">' + $("#newTag").val().trim() +'<div onclick="removeTag($(this).parent())" class="glyphicon glyphicon-remove closeIcon"></div></div>')
                     }
                     else
                         toastr.error(data.message);
@@ -46,8 +46,8 @@
             }
 
             function removeTag(e) {
-                var tag = e.text();
-
+                var tag = $(e).attr('data-tag');
+                console.log(tag);
                 var data = {
                     'csrfmiddlewaretoken': '{{csrf_token}}',
                     'tag': e.text().trim(),
@@ -58,9 +58,27 @@
                     if (data.results) {
                         e.remove();
                         toastr.success('Tag removed successfully');
-                    }
-                    else
+                        $("span[data-tag='" + tag + "']").remove();
+                    } else {
                         toastr.error(data.message);
+                    }
+                });
+            }
+
+            function removeItemTag(e) {
+                var data = {
+                    'csrfmiddlewaretoken': '{{csrf_token}}',
+                    'tag': $(e).attr("data-tag"),
+                    'id': '{{id}}',
+                    'rid': $(e).parent().attr("data-rid"),
+                }
+                $.post("RemoveItemTag", data, function(data) {
+                    if (data.results) {
+                        e.remove();
+                        toastr.success("Tag removed successfully");
+                    } else {
+                        toastr.error(data.message);
+                    }
                 });
             }
 
@@ -74,17 +92,23 @@
 
             function drop(ev) {
                 ev.preventDefault();
-                var id = $(ev.target).attr("id");
-                var $box = $("#" + id);
+                var rid = $(ev.target).attr("data-rid");
+                var tags = [];
+                targetStuff = targetStuff.trim();
+
+                $("#data-" + rid).children('span').each(function(index, elem) {
+                    tags.push($(elem).attr("data-tag"));
+                });
 
                 var data = {
                     'csrfmiddlewaretoken': '{{csrf_token}}',
-                    'rid': id.split("-")[id.split("-").length-1],
+                    'rid': rid,
                     'datasetId': '{{id}}',
-                    'tags': $("#" + id).html().split(","),
+                    'tags': tags
                 };
 
                 data.tags.push(targetStuff);
+
                 // removing trailing whitespace
                 for (var i = 0; i < data.tags.length; i++) {
                     data.tags[i] = data.tags[i].trim()
@@ -94,8 +118,8 @@
                 $.post('TagItem', data, function(data) {
                     if (data.result) {
                         toastr.success("Tag added successfully");
-                        var comma = $("#" + id).html() == "" ? "" : ", ";
-                        $("#" + id).append(comma + targetStuff);
+                        var span = "<span class='badge wordwrap tag' data-rid='" + rid + "' data-tag='" + targetStuff + "'>" + targetStuff + "<div onclick='removeItemTag($(this).parent())' class='glyphicon glyphicon-remove closeIcon'></div></span>";
+                        $("#data-" + rid).append(span);
                     } else {
                         toastr.error(data.message);
                     }
@@ -112,7 +136,7 @@
 
                     <div class="well">
                         <form>
-                            <textarea id="newTag" name="newTag" class="textbox" rows="5" cols="30" style="width:100%; resize:none">New Tag</textarea>
+                            <textarea id="newTag" name="newTag" placeholder="New Tag" class="textbox" rows="5" cols="30" style="width:100%; resize:none"></textarea>
                             <br>
                             <button type="button" onclick="addTag()" class="btn btn-default btn-sm">
                             <span class="glyphicon glyphicon-plus"></span> Add
@@ -123,7 +147,7 @@
                       <h5><span class="glyphicon glyphicon-tag"></span>Tags</h5>
                       <div id="sidebar">
                         {% for tag in tags %}
-                        <div id="{{tag}}" class="badge wordwrap" draggable="true" ondragstart="drag(event)" style="background-color:deepskyblue">{{tag}}
+                        <div id="{{tag}}" data-tag="{{tag}}" class="badge wordwrap" draggable="true" ondragstart="drag(event)" style="background-color:deepskyblue">{{tag}}
                             <div onclick="removeTag($(this).parent())" class="glyphicon glyphicon-remove closeIcon"></div>
                         </div>
                         {% endfor %}
@@ -137,17 +161,22 @@
                         <thead>
                             <tr>
                                 {% for question in questions %}
-                                <td>{{question}}</td>
+                                    <td>{{question}}</td>
                                 {% endfor %}
                                 <td>Tags</td>
                             </tr>
                         </thead>
                         {% for row in data %}
-                        <tr>
-                            {% for response in row %}
-                            <td>{{response.response}}</td>
-                            {% endfor %}
-                            <td id='rid-{{row.0.rid}}' ondrop="drop(event)" ondragover="allowDrop(event)">{% for tags in row.0.tags %}{{tags}}{% if forloop.last is False and row.0.tags|length > 1 %}, {% endif %}{% endfor %}</td>
+                            <tr>
+                                {% for response in row %}
+                                    <td>{{response.response}}</td>
+                                {% endfor %}
+                                <td id='data-{{row.0.rid}}' data-rid='{{row.0.rid}}' ondrop="drop(event)" ondragover="allowDrop(event)">
+                                    {% for tag in row.0.tags %}
+                                        <span class="badge wordwrap tag" data-rid='{{row.0.rid}}' data-tag='{{tag}}'>{{tag}}<div onclick="removeItemTag($(this).parent())" class="glyphicon glyphicon-remove closeIcon"></div></span>
+                                    {% endfor %}
+                                </td>
+                            </tr>
                         {% endfor %}
                     </table>
                 </div>

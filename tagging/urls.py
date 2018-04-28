@@ -28,7 +28,8 @@ urlpatterns = [
     url(r'^TagItem$', views.TagItem, name='TagItem'),
     url(r'^ExportCSV$', views.ExportCSV, name='ExportCSV'),
     url(r'^ExportXLSX$', views.ExportXLSX, name='ExportXLSX'),
-    url(r'^DeleteDataSet$', views.DeleteDataSet, name='DeleteDataSet')
+    url(r'^DeleteDataSet$', views.DeleteDataSet, name='DeleteDataSet'),
+    url(r'^RemoveItemTag$', views.RemoveItemTag, name='RemoveItemTag')
 ]
 
 if settings.DEBUG:
