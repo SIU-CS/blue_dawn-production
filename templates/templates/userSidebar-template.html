@@ -37,7 +37,7 @@
       <a href ="{% url 'importing' %}"><p><span class="glyphicon glyphicon-import"><p></p></span> Import Data</p></a>
   </div>
   <div class="well" id="colSelect">
-      <a href ="{% url 'colSelect' %}"><p><span class="glyphicon glyphicon-import"><p></p></span> Column Select</p></a>
+      <a href ="{% url 'colSelect' %}?dataset={{id}}"><p><span class="glyphicon glyphicon-import"><p></p></span> Column Select</p></a>
   </div>
   <div class="well" id="exporting">
     <p><span class="glyphicon glyphicon-export"><p></p></span>Export Data</p>

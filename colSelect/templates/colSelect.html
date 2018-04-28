@@ -39,8 +39,8 @@
                     <h2>Select Columns to use</h2>
                     <!--This is where the js multiselect should go-->
                     <select multiple="multiple" id="my-select" name="my-select[]">
-                        {% for item in data %}
-                            <option value='{{item.question}}'>{{item.question}}</option>
+                        {% for question in questions %}
+                            <option value='{{question}}'>{{question}}</option>
                         {% endfor %}
                     </select>
                     <script src="{% static 'js/jquery.multi-select.js' %}" type="text/javascript"></script>
