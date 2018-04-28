@@ -208,7 +208,10 @@ class JSONDataSet:
         Args:
             rid (int): Response id for the response you are removing the tag from
             tag (str): Tag you are removing from the response"""
-        item = _GetTagObject(rid)
+        item = self._GetTagObject(rid)
+        pprint(item)
+        print(tag)
+        print(tag in item['tags'])
         if (tag in item['tags']):
             item['tags'].remove(tag)
 

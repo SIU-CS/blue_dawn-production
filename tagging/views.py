@@ -74,6 +74,19 @@ def removetag(request):
 
     return JsonResponse(toreturn)
 
+def RemoveItemTag(request):
+    toreturn = dict()
+    try:
+        dataset = JSONDataSet.GetDataset(request.POST.get("id"))
+        dataset.RemoveItemTag(request.POST.get("rid"), request.POST.get("tag"))
+        dataset.SaveDataset(request.user)
+        toreturn['results'] = True
+    except Exception as e:
+        toreturn['results'] = False
+        toreturn['message'] = str(e)
+
+    return JsonResponse(toreturn)
+
 
 def ExportCSV(request):
     dataset = JSONDataSet.GetDataset(request.GET.get('id'))
@@ -107,8 +120,5 @@ def DeleteDataSet(request):
     dataset = JSONDataSet.GetDataset(request.GET.get('id'))
     dataset.DeleteDataSet(request.user)
     username = request.user.username
-    
+
     return redirect('http://127.0.0.1:8000/userpage/')
-
-
-

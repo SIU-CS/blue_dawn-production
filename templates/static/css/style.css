@@ -55,18 +55,18 @@ span.psw {
     z-index: 1; /* Sit on top */
     left: 0;
     top: 0;
-    width: auto; 
-    height: auto; 
-    overflow: auto; 
-    background-color: rgb(0,0,0); 
-    background-color: rgba(0,0,0,0.4); 
+    width: auto;
+    height: auto;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
     padding-top: 60px;
 }
 .modal-content {
     background-color: #fefefe;
-    margin: 5% auto 15% auto; 
+    margin: 5% auto 15% auto;
     border: 1px solid #888;
-    width: auto; 
+    width: auto;
 }
 .close {
     position: absolute;
@@ -89,7 +89,7 @@ td,th{
     padding: 16px;
 }
 tr:nth-child(even){
-    background-color: #f2f2f2; 
+    background-color: #f2f2f2;
 }
 
 
@@ -126,7 +126,10 @@ tr:nth-child(even){
     height: auto;
 }
 
+.badge{
+    background-color: deepskyblue;
+}
+
 .closeIcon{
     float: right;
 }
-
