@@ -1,0 +1,25 @@
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+
+
+<div class="col-sm-2 wiki sidenav">
+    <div>
+        <a href="{% url 'wiki' %}"><p>Home</p></a>
+    </div>
+    <div>
+        <a href="{% url 'wiki_accounts' %}"><p>Accounts</p></a>
+    </div>
+    <div>
+        <a href ="{% url 'wiki_importing' %}"><p>Importing Datasets</p></a>
+    </div>
+    <div>
+        <a href ="{% url 'wiki_tagging' %}"><p>Tagging a Dataset</p></a>
+    </div>
+    <div>
+            <a href ="{% url 'wiki_exporting' %}"><p>Exporting a Dataset</p></a>
+    </div>
+    <div>
+            <a href ="{% url 'wiki_hosting' %}"><p>Hosting our Server</p></a>
+    </div>
+
+</div>

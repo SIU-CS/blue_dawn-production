@@ -24,9 +24,10 @@ from wiki import views
 urlpatterns = [
     url(r'^$', views.wiki, name="wiki"),
     url(r'^accounts$', views.wiki_accounts, name="wiki_accounts"),
-    url(r'^selecting$', views.wiki_selecting, name="wiki_selecting"),
     url(r'^importing$', views.wiki_importing, name="wiki_importing"),
-    url(r'^tagging$', views.wiki_creating_adding_tags, name="wiki_creating_adding_tags"),
+    url(r'^tagging$', views.wiki_tagging, name="wiki_tagging"),
+    url(r'^exporting$', views.wiki_exporting, name="wiki_exporting"),
+    url(r'^hosting$', views.wiki_hosting, name="wiki_hosting"),
 ]
 
 if settings.DEBUG:
