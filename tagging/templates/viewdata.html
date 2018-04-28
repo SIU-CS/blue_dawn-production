@@ -34,6 +34,8 @@
                     if (data.results) {
                         toastr.success('Tag added successfully');
                         $('#sidebar').append('<div data-tag="' + $("#newTag").val().trim() + '" id="' + $("#newTag").val().trim() +'" class="badge wordwrap" draggable="true" ondragstart="drag(event)">' + $("#newTag").val().trim() +'<div onclick="removeTag($(this).parent())" class="glyphicon glyphicon-remove closeIcon"></div></div>')
+                        $("#newTag").val("");
+
                     }
                     else
                         toastr.error(data.message);
