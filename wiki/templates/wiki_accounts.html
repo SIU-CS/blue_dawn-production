@@ -1,0 +1,79 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Blue Dawn Analysis</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel ="stylesheet" href="{% static 'css/style.css' %}">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>        
+    </head>
+    <body>
+        {% include 'topBar-template.html' %}
+        
+        <div class="container-fluid text-center">
+            <div class="row content">
+                <div class="col-sm-2 sidenav">
+                <p></p>
+                <p></p>
+                </div>
+                <div class="col-sm-8 text-left">
+                    <h2>Blue Dawn Analysis Wiki</h2>
+                    <hr>
+                    <h3>Accounts</h3>
+                    <h4>Setting Up an Account</h4>
+                    <p>Setting up an account is pretty simple:
+                        <ol>
+                            <li>Go to the sign up page or go to the login page, and click the text that says “Sign Up” in the middle of the screen.</li>
+                            <li>Provide a username.  It must be unique from other usernames on the site.</li>
+                            <li>Provide an email address.  This is used for account activation and for resetting the account password, so it must be one you can access.</li>
+                            <li>Choose a password.  It cannot be all numbers, less than eight characters, too close to the username, or too common (such as “Password”).  For choosing a good password, this is a good resource.</li>
+                            <li>Confirm the password.</li>
+                            <li>Press the pretty blue “Sign Up” button.</li>
+                            <li>Go to the email address you provided.  You should have an email from us with an activation link.</li>
+                            <li>If an email does not appear within a reasonable amount of time, please make sure you provided the correct email address and check your junk mail</li>
+                            <li>Once you receive the email, press the link and your account will be set up!</li>
+                            <li>Now simply click on the blue “Log in” button to proceed to logging in.</li>
+                        </ol>
+                        <br> 
+                    </p>
+                    <h4>Logging In</h4> 
+                    <p>Logging in to the site is very straightforward:
+                        <ol>
+                            <li>Go to the login page.</li>
+                            <li>Enter your username and password and press the “Login” button.</li>
+                            <li>You may check the “Remember me” box if you would like to reduce the number of times you need to log in to your account.  Be aware that this will store your login information as a cookie.</li>
+                        </ol>
+                        <br>
+                    </p>
+                    <h4>Resetting Password</h4>
+                    <p>If you have forgotten your password, or if you simply wish to change your old password these steps will get you back into your account in no time!
+                        <ol>
+                            <li>Go to the login page.</li>
+                            <li>Click the text “Forgot your password” located toward the bottom of the page.  This will take you to a page where you will need to enter the email address you used to set up the account.</li>
+                            <li>Provide the appropriate email address in the text box and press “Submit”.  This will send an email to the provided account with a link for resetting your password.</li>
+                            <li>Go to your email account and open the link provided.</li>
+                            <li>On the webpage, enter a new password and confirm the password.</li>
+                            <li>Click the “Reset Password” button.</li>
+                            <li>Your account password should now be updated!  You can now proceed to logging in.</li>
+                        </ol>
+                        <br>
+                    </p>  
+                        
+                       
+                    
+                </div>
+                <div class="col-sm-2 sidenav">
+                </div>
+            </div>
+        
+        </div>
+    
+    <footer class="container-fluid text-center">
+        {% include 'footerTemplate.html' %}
+    </footer>
+</body>
+</html>
