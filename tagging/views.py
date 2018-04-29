@@ -19,7 +19,7 @@ def viewdata(request):
         return render(request,'index.html')
 
     context = {
-        'data': dataset.GetResponseMatrix(),
+        'data': dataset.GetResponseMatrix(False),
         'questions': dataset.GetQuestions(False),
         'tags': dataset.GetTags(),
         'id': id,

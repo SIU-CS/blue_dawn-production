@@ -49,7 +49,6 @@
 
             function removeTag(e) {
                 var tag = $(e).attr('data-tag');
-                console.log(tag);
                 var data = {
                     'csrfmiddlewaretoken': '{{csrf_token}}',
                     'tag': e.text().trim(),
