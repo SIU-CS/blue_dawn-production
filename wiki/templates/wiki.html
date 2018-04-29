@@ -32,6 +32,24 @@
                         <button type="button" class="w3-btn w3-ripple w3-blue">Exporting DataSer</button>
                         <button type="button" class="w3-btn w3-ripple w3-blue">Hosting</button>
                     </div>
+                    <div>
+                        <div id="account">
+                            {% include 'wiki_accounts.html' %}
+                        </div>
+                        <div id="importing">
+                            {% include 'wiki_importing.html' %}
+                        </div>
+                        <div id="tagging">
+                            {% include 'wiki_tagging.html' %}
+                        </div>
+                        <div id="exporting">
+                            {% include 'wiki_exporting.html' %}
+                        </div>
+                        <div id="hosting">
+                            {% include 'wiki_hosting.html' %}
+                        </div>
+                    </div>
+
                 </div>
                 <div class="col-sm-2 wiki sidenav">
                     {% include 'wikiSidebar-template.html' %}
