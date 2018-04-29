@@ -9,7 +9,12 @@
         <link rel ="stylesheet" href="{% static 'css/style.css' %}">
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>        
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" integrity="sha256-ENFZrbVzylNbgnXx0n3I1g//2WeO47XxoPe0vkp3NC8=" crossorigin="anonymous" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha256-3blsJd4Hli/7wCQ+bmgXfOdK7p/ZUMtPXY08jmxSSgk=" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+   
     </head>
     <body>
         {% include 'topBar-template.html' %}
@@ -26,13 +31,13 @@
                     <p>Welcome to the Blue Dawn Analysis Wiki page!  Within these pages you will find lots of valuable information on how to use this wonderful tool.  Click on the links in the side-bar to get started!</p>
 
                     <div class="btn-group">
-                        <button type="button" class="w3-btn w3-ripple w3-blue">Account</button>
-                        <button type="button" class="w3-btn w3-ripple w3-blue">Importing DataSet</button>
-                        <button type="button" class="w3-btn w3-ripple w3-blue">Tagging DataSer</button>
-                        <button type="button" class="w3-btn w3-ripple w3-blue">Exporting DataSer</button>
-                        <button type="button" class="w3-btn w3-ripple w3-blue">Hosting</button>
+                        <button type="button" id="accountbtn" class="w3-btn w3-ripple w3-blue">Account</button>
+                        <button type="button" id="importingbtn" class="w3-btn w3-ripple w3-blue">Importing DataSet</button>
+                        <button type="button" id="taggingbtn" class="w3-btn w3-ripple w3-blue">Tagging DataSer</button>
+                        <button type="button" id="exportingbtn" class="w3-btn w3-ripple w3-blue">Exporting DataSer</button>
+                        <button type="button" id="hostingbtn" class="w3-btn w3-ripple w3-blue">Hosting</button>
                     </div>
-                    <div>
+                    <div id="wikigrid">
                         <div id="account">
                             {% include 'wiki_accounts.html' %}
                         </div>
@@ -51,9 +56,7 @@
                     </div>
 
                 </div>
-                <div class="col-sm-2 wiki sidenav">
-                    {% include 'wikiSidebar-template.html' %}
-                </div>
+                
             </div>
         
         </div>
