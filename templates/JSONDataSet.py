@@ -65,7 +65,8 @@ class JSONDataSet:
                     for qid, question in enumerate(row):
                         json_dict['data']['questions'].append({
                             'qid': qid,
-                            'question': question})
+                            'question': question,
+                            'display_question': False})
 
                 else: # all rows after the first represent responses to the questions
                     for qid, response in enumerate(row):
@@ -113,7 +114,8 @@ class JSONDataSet:
                 for qid, question in enumerate(xlsx_data[str(row)]):
                     json_dict['data']['questions'].append({
                         'qid': qid,
-                        'question': question.value})
+                        'question': question.value,
+                        'display_question': True})
 
             else: # all rows after the first represent responses to the questions
                 for qid, response in enumerate(xlsx_data[str(row)]):
@@ -229,11 +231,16 @@ class JSONDataSet:
             tags (list<str>): List of tags to be set to this dataset"""
         self.json_dict['tags'] = tags
 
-    def GetQuestions(self):
+    def GetQuestions(self, all):
         """ Get the list of questions in this DataSet
         Returns:
             list<str>: List of questions"""
-        return [question['question'] for question in self.json_dict['data']['questions']]
+        questions = self.json_dict['data']['questions']
+        pprint(questions)
+        if all:
+            return [question['question'] for question in questions]
+        else:
+            return [question['question'] for question in list(filter(lambda x: x['display_question'], questions))]
 
     def GetTags(self):
         """ Get the list of global tags in the DataSet
