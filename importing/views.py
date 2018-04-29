@@ -49,7 +49,7 @@ def importing(request):
                 temp['name'] = d.json_dict["title"]
                 data.append(temp)
 
-            return redirect('http://127.0.0.1:8000/userpage/')
+            return redirect('http://127.0.0.1:8000/colSelect?dataset=' + str(d.id))
 
     return render(request, 'importing.html', { 'form': form })
 

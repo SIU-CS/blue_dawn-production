@@ -65,7 +65,8 @@ class JSONDataSet:
                     for qid, question in enumerate(row):
                         json_dict['data']['questions'].append({
                             'qid': qid,
-                            'question': question})
+                            'question': question,
+                            'display_question': True})
 
                 else: # all rows after the first represent responses to the questions
                     for qid, response in enumerate(row):
@@ -113,7 +114,8 @@ class JSONDataSet:
                 for qid, question in enumerate(xlsx_data[str(row)]):
                     json_dict['data']['questions'].append({
                         'qid': qid,
-                        'question': question.value})
+                        'question': question.value,
+                        'display_question': True})
 
             else: # all rows after the first represent responses to the questions
                 for qid, response in enumerate(xlsx_data[str(row)]):
@@ -192,7 +194,6 @@ class JSONDataSet:
             tags (list<str>): List of strings representing the tags to set for the response"""
         item = self._GetTagObject(rid)
         item['tags'] = tags
-        pprint(item)
 
     def ItemHasTag(self, rid, tag):
         """ Check if a given response already has a given tag
@@ -209,9 +210,6 @@ class JSONDataSet:
             rid (int): Response id for the response you are removing the tag from
             tag (str): Tag you are removing from the response"""
         item = self._GetTagObject(rid)
-        pprint(item)
-        print(tag)
-        print(tag in item['tags'])
         if (tag in item['tags']):
             item['tags'].remove(tag)
 
@@ -229,11 +227,15 @@ class JSONDataSet:
             tags (list<str>): List of tags to be set to this dataset"""
         self.json_dict['tags'] = tags
 
-    def GetQuestions(self):
+    def GetQuestions(self, all):
         """ Get the list of questions in this DataSet
         Returns:
             list<str>: List of questions"""
-        return [question['question'] for question in self.json_dict['data']['questions']]
+        questions = self.json_dict['data']['questions']
+        if all:
+            return [question['question'] for question in questions]
+        else:
+            return [question['question'] for question in list(filter(lambda x: x['display_question'], questions))]
 
     def GetTags(self):
         """ Get the list of global tags in the DataSet
@@ -257,16 +259,38 @@ class JSONDataSet:
             dict(): tag object for the specified response"""
         return next(filter(lambda x: str(x['rid']) == rid, self.json_dict['data']['tags']), dict())
 
-    def GetResponseMatrix(self):
+    def GetResponseMatrix(self, all):
         """ Get a 2D list representation of the responses, that turns out to be useful in certain situations"""
-        # initialize the matrix with null values in this silly nested list compehension
-        matrix = [[None for i in range(len(self.json_dict['data']['questions']))] for j in range(int(len(self.json_dict['data']['responses'])/len(self.json_dict['data']['questions'])))]
-        for response in self.json_dict['data']['responses']:
-            # add the values to the matrix
-            matrix[response['rid']][response['qid']] = response
-            matrix[response['rid']][response['qid']]['tags'] = next(filter(lambda x: x['rid'] == response['rid'], self.json_dict['data']['tags']), dict()).get('tags', list())
-        return matrix
+        # get needed data
+        displayed_questions = list(filter(lambda x: x['display_question'], self.json_dict['data']['questions']))
+        qids = list(map(lambda x: x['qid'], displayed_questions))
+        displayed_responses = list(filter(lambda x: x['qid'] in qids,  self.json_dict['data']['responses']))
+        nquestions = len(displayed_questions)
+        nresponses = int(len(displayed_responses) / nquestions)
 
+        if not all:
+            # initialize the matrix with null values in this silly nested list compehension
+            matrix = [[None for i in range(nquestions)] for j in range(nresponses)]
+            displayed_responses.sort(key=lambda x: x['qid'])
+            for q in range(nquestions):
+                for r in range(int(nresponses)):
+                    matrix[r][q] = displayed_responses[q*nresponses + r]
+                    tags = next(filter(lambda x: x['rid'] == matrix[r][q]['rid'], self.json_dict['data']['tags'])).get('tags', list())
+                    matrix[r][q]['tags'] = tags
+            return matrix
+        else:
+            matrix = [[None for i in range(len(self.json_dict['data']['questions']))] for j in range(int(len(self.json_dict['data']['responses'])/len(self.json_dict['data']['questions'])))]
+            for response in self.json_dict['data']['responses']:
+                # add the values to the matrix
+                matrix[response['rid']][response['qid']] = response
+                matrix[response['rid']][response['qid']]['tags'] = next(filter(lambda x: x['rid'] == response['rid'], self.json_dict['data']['tags']), dict()).get('tags', list())
+            return matrix
+
+    def SetCols(self, cols):
+        pprint(cols)
+        for question in self.json_dict['data']['questions']:
+            print("asdf")
+            question['display_question'] = (question['question'] in cols)
 
     def ExportCSV(self, user):
         """ Export this dataset as a csv file.
@@ -289,7 +313,7 @@ class JSONDataSet:
             writer.writerow(row) # write the first row to the csv
 
             # get the matrix representation of the responses for convenience
-            matrix = self.GetResponseMatrix()
+            matrix = self.GetResponseMatrix(True)
 
             # iterate through the rows
             for row in matrix:
@@ -323,7 +347,7 @@ class JSONDataSet:
         ws.append(row) # write the first row to the xlsx
 
         # get the matrix representation of the responses for convenience
-        matrix = self.GetResponseMatrix()
+        matrix = self.GetResponseMatrix(True)
 
         # iterate through the rows
         for row in matrix:

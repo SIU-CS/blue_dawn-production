@@ -19,12 +19,11 @@ def viewdata(request):
         return render(request,'index.html')
 
     context = {
-        'data': dataset.GetResponseMatrix(),
-        'questions': dataset.GetQuestions(),
+        'data': dataset.GetResponseMatrix(False),
+        'questions': dataset.GetQuestions(False),
         'tags': dataset.GetTags(),
         'id': id,
     }
-
     return render(request, 'viewdata.html', context)
 
 def addtag(request):

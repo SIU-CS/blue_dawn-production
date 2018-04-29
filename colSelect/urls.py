@@ -23,6 +23,7 @@ from colSelect import views
 
 urlpatterns = [
     url(r'^$', views.colSelect, name="colSelect"),
+    url(r'^setCols$', views.setCols, name="setCols"),
 ]
 
 if settings.DEBUG:
