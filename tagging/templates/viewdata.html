@@ -34,6 +34,8 @@
                     if (data.results) {
                         toastr.success('Tag added successfully');
                         $('#sidebar').append('<div data-tag="' + $("#newTag").val().trim() + '" id="' + $("#newTag").val().trim() +'" class="badge wordwrap" draggable="true" ondragstart="drag(event)">' + $("#newTag").val().trim() +'<div onclick="removeTag($(this).parent())" class="glyphicon glyphicon-remove closeIcon"></div></div>')
+                        $("#newTag").val("");
+
                     }
                     else
                         toastr.error(data.message);
@@ -147,9 +149,7 @@
                       <h5><span class="glyphicon glyphicon-tag"></span>Tags</h5>
                       <div id="sidebar">
                         {% for tag in tags %}
-                        <div id="{{tag}}" data-tag="{{tag}}" class="badge wordwrap" draggable="true" ondragstart="drag(event)" style="background-color:deepskyblue">{{tag}}
-                            <div onclick="removeTag($(this).parent())" class="glyphicon glyphicon-remove closeIcon"></div>
-                        </div>
+                        <div id="{{tag}}" data-tag="{{tag}}" class="badge wordwrap" draggable="true" ondragstart="drag(event)" style="background-color:deepskyblue">{{tag}}<div onclick="removeTag($(this).parent())" class="glyphicon glyphicon-remove closeIcon"></div></div>
                         {% endfor %}
                       </div>
                    </div>

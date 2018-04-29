@@ -20,11 +20,10 @@ def viewdata(request):
 
     context = {
         'data': dataset.GetResponseMatrix(),
-        'questions': dataset.GetQuestions(),
+        'questions': dataset.GetQuestions(False),
         'tags': dataset.GetTags(),
         'id': id,
     }
-
     return render(request, 'viewdata.html', context)
 
 def addtag(request):
@@ -36,9 +35,13 @@ def addtag(request):
             toreturn['results'] = False
             toreturn['message'] = "Tag already exists"
         else:
-            dataset.AddTag(request.POST.get('tag'))
-            dataset.SaveDataset(request.user)
-            toreturn['results']=True
+            if (request.POST.get('tag') == ""):
+                toreturn['results'] = False
+                toreturn['message'] = "Tag cannot be empty"
+            else:
+                dataset.AddTag(request.POST.get('tag'))
+                dataset.SaveDataset(request.user)
+                toreturn['results']=True
 
     except Exception as e:
         toreturn['results']=False
