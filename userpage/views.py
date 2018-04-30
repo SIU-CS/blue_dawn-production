@@ -19,10 +19,12 @@ def profile(request):
 
     return render(request,'profile.html', {"data": data, "username": username})
 
+#deleting the whole dataset from the viewdata page
 def deleteData(request):
     toreturn = dict()
-
+    #get the dataset by "id" by passing the dataset's id to the "GetDataset" method in the JSONDataSet.py file
     dataset = JSONDataSet.GetDataset(request.POST.get("itemId"))
+    #after getting the desired dataset, it passed to DeleteDataSet method in the the JSONDataSet.py file
     dataset.DeleteDataSet(request.user)
     toreturn["results"] = True
     

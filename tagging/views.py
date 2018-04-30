@@ -119,8 +119,11 @@ def ExportXLSX(request):
 
     return response
 
+#deleting the whole dataset from the viewdata page
 def DeleteDataSet(request):
+    #get the dataset by "id" by passing the dataset's id to the "GetDataset" method in the JSONDataSet.py file
     dataset = JSONDataSet.GetDataset(request.GET.get('id'))
+    #after getting the desired dataset, it passed to DeleteDataSet method in the the JSONDataSet.py file
     dataset.DeleteDataSet(request.user)
     username = request.user.username
 

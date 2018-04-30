@@ -365,6 +365,10 @@ class JSONDataSet:
         return "media/tmp/self.json_dict['title']" + ".xlsx"
 
     def DeleteDataSet(self, user):
+        """ Deleting this dataset.
+        Args:
+            user (user): Requesting django user object"""
+        
         if not self._CheckPermission(user):
             return
 

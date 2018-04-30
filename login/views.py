@@ -26,19 +26,6 @@ def signup(request):
             # to get current web page
             current_site = get_current_site(request)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
             #sending email to user for activation
             # subject of the email
             # message get the text in "email_activation.html" and render it to string to send it to the user
