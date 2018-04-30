@@ -9,18 +9,27 @@ from templates.form import RegistrationForm
 from login.tokens import accountActivation
 from django.core.mail import EmailMessage
 
+
 def login(request):
     return render(request, 'registration/login.html')
 
-
+#New user registration
 def signup(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
         if form.is_valid():
+            # save user user in the database, but the user won't be active 
             user = form.save(commit=False)
+            # assign user's activation to not active
             user.is_active = False
             user.save()
+            # to get current web page
             current_site = get_current_site(request)
+
+            #sending email to user for activation
+            # subject of the email
+            # message get the text in "email_activation.html" and render it to string to send it to the user
+            # 
             subject = 'Activate you account'
             message = render_to_string('registration/email_activation.html', {
                 'user': user,
