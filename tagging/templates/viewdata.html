@@ -19,7 +19,17 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha256-3blsJd4Hli/7wCQ+bmgXfOdK7p/ZUMtPXY08jmxSSgk=" crossorigin="anonymous"></script>
         <script>
             $(document).ready( function () {
-              $('#userData').DataTable({"pageLength":1, "lengthMenu": [ [1], [1] ]});
+              $('#userData').DataTable({
+		  "pageLength":1, 
+                  "lengthMenu": [ [1], [1] ],
+		  "fnDrawCallback": function() {
+		      $(".tag").each(function(index, elem) {
+		          if ($("#" + $(elem).attr("data-tag")).length == 0) {
+		              elem.remove();
+		          }
+		      });
+	          }
+	      });
               //[1, 10, 25, 50, -1], [1, 10, 25, 50, "All"]
               $('#exporting').show();
             });
