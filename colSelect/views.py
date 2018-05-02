@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from templates.JSONDataSet import JSONDataSet
 from django.http import JsonResponse
-from pprint import pprint
 
 def colSelect(request):
     parameter = request.GET.get('dataset', '')

@@ -3,7 +3,6 @@ import openpyxl
 import json
 from enum import Enum
 from .models import DataSet
-from pprint import pprint
 
 """ Enum to represent filetype, used as an argument for the constructor """
 class FileType(Enum):
@@ -287,9 +286,7 @@ class JSONDataSet:
             return matrix
 
     def SetCols(self, cols):
-        pprint(cols)
         for question in self.json_dict['data']['questions']:
-            print("asdf")
             question['display_question'] = (question['question'] in cols)
 
     def ExportCSV(self, user):
@@ -368,7 +365,7 @@ class JSONDataSet:
         """ Deleting this dataset.
         Args:
             user (user): Requesting django user object"""
-        
+
         if not self._CheckPermission(user):
             return
 

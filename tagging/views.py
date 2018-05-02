@@ -5,7 +5,6 @@ from django.http import JsonResponse
 from django.core.files import File
 from django.http import HttpResponse
 from django.utils.encoding import smart_str
-from pprint import pprint
 import os
 
 # display json data on a table

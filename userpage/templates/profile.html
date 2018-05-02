@@ -29,7 +29,6 @@
 
             function deleteDataSet(event) {
                 if(event.stopPropagation) event.stopPropagation();
-                console.log(event.target.id);
                 var data = {
                     'itemId': event.target.id,
                     'csrfmiddlewaretoken': '{{csrf_token}}',
