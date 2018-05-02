@@ -9,11 +9,11 @@
         <link rel ="stylesheet" href="{% static 'css/style.css' %}">
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>        
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
     <body>
         {% include 'topBar-template.html' %}
-        
+
         <div class="container-fluid text-center">
             <div class="row content">
                 <div class="col-sm-2 sidenav">
@@ -38,9 +38,9 @@
                             <li><p>Once you receive the email, press the link and your account will be set up!</p></li>
                             <li><p>Now simply click on the blue “Log in” button to proceed to logging in.<p><br><img style="width:100%; height:100%; margin:-8px;" src="{% static 'assets/wiki/activation2.png' %}" alt="activation page" /></p><p>This is a screenshot of the activation page.</p></p></li>
                         </ol>
-                        <br> 
+                        <br>
                     </p>
-                    <h4>Logging In</h4> 
+                    <h4>Logging In</h4>
                     <p>Logging in to the site is very straightforward:
                         <ol>
                             <li><p>Go to the <a href= {% url 'login' %}>login</a> page.</p></li>
@@ -61,15 +61,15 @@
                             <li><p>Your account password should now be updated!  You can now proceed to  <a href= {% url 'login' %}>logging</a> in.</p></li>
                         </ol>
                         <br>
-                    </p>  
+                    </p>
                 </div>
                 <div class="col-sm-2 wiki sidenav">
                     {% include 'wikiSidebar-template.html' %}
                 </div>
             </div>
-        
+
         </div>
-    
+
     <footer class="container-fluid text-center">
         {% include 'footerTemplate.html' %}
     </footer>
