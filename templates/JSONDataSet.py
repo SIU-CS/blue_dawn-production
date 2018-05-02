@@ -27,15 +27,16 @@ class JSONDataSet:
         self.name = name # need to save name as an identifier
         self.id = id
 
-        if filetype == FileType.CSV:
-            self.json_dict = self._init_csv(filepath, name, description)
-
-        elif filetype == FileType.XLSX:
-            self.json_dict = self._init_xlsx(filepath, name, description)
-
-        elif filetype == FileType.JSON:
-            # lol why u do this?
-            self.json_dict = json.loads(filepath)
+        try:
+            if filetype == FileType.CSV:
+                self.json_dict = self._init_csv(filepath, name, description)
+            elif filetype == FileType.XLSX:
+                self.json_dict = self._init_xlsx(filepath, name, description)
+            elif filetype == FileType.JSON:
+                # lol why u do this?
+                self.json_dict = json.loads(filepath)
+        except Exception as e:
+            raise InputException(str(e)) 
 
     def _init_csv(self, filepath, name, description):
         """Initialize the object with a csv file
@@ -62,6 +63,9 @@ class JSONDataSet:
             for i, row in enumerate(csv_data):
                 if i == 0: # first pass of loop -> first row of csv -> questions
                     for qid, question in enumerate(row):
+                        questions = list(map(lambda x: x['question'], json_dict['data']['questions']))
+                        if question in questions:
+                            raise InputException("Duplicate columns in data file")
                         json_dict['data']['questions'].append({
                             'qid': qid,
                             'question': question,
@@ -111,6 +115,9 @@ class JSONDataSet:
         for row in range(1, xlsx_data.max_row + 1):
             if row == 1: # first pass of loop -> first row of xlsx -> questions
                 for qid, question in enumerate(xlsx_data[str(row)]):
+                    questions = list(map(lambda x: x['question'], json_dict['data']['questions']))
+                    if question in questions:
+                        raise InputException("Duplicate columns in data file")
                     json_dict['data']['questions'].append({
                         'qid': qid,
                         'question': question.value,

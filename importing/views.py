@@ -21,7 +21,11 @@ def importing(request):
                 filetype = FileType.XLSX
             else:
                 # TODO: correct way to error out here?
-                return render(request, 'importing.html', { 'form': form })
+                context1 = {
+                    'error': True,
+                    'message': "Incorrect file extension",
+                }
+                return render(request, 'importing.html', { 'context': context1, 'form': form })
 
             filepath = saveUploadedFile(f) # save file to disk temporarily
 
@@ -31,10 +35,14 @@ def importing(request):
             try:
                 data = JSONDataSet(filepath, filetype, name, description)
                 data.SaveDataset(request.user) # save dataset to database as json
-            except InputException:
+            except InputException as e:
                 # TODO: correct way to error out here?
                 os.remove(filepath) # delete the temporary file
-                return render(request, 'importing.html')
+                context2 = {
+                    'error': True,
+                    'message': str(e),
+                }
+                return render(request, 'importing.html', {'context': context2, 'form': form })
 
             os.remove(filepath) # delete the temporary file
 

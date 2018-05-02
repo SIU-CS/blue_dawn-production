@@ -23,7 +23,7 @@ def viewdata(request):
         'tags': dataset.GetTags(),
         'id': id,
     }
-    return render(request, 'viewdata.html', context)
+    return render(request, 'viewdata.html', context=context)
 
 def addtag(request):
     toreturn = dict()
