@@ -26,34 +26,35 @@
                     <h3>Importing a Dataset</h3>
                 	<p>Importing a dataset is a simple task:
                         <ol>
-                            <li>Log in to your account if you are not already logged in.</li>
-                            <li>Click on the “Import Data” button on the right sidebar.  This will take you to the importing page.</li>
-                            <li>Provide a name for the dataset in the top text field.</li>
-                            <li>Provide a short description of the dataset in the large text area.</li>
-                            <li>Click on the “Browse” button below the description field to open your default file explorer.</li>
-                            <li>Select the file you would like to import.  Our site currently accepts .xlsx and .csv files.</li>
-                            <li>When you are ready, press the blue “Import” button to import the selected file.</li>
-                            <li>You have now successfully imported your data!  You can now select this dataset for tagging or exporting.</li>
+                            <li><p><a href= {% url 'login' %}>Log in</a> to your account if you are not already logged in.</p></li>
+                            <li><p>Click on the “Import Data” button on the right sidebar.  This will take you to the importing page.</p></li>
+                            <li><p>Provide a name for the dataset in the top text field.</p></li>
+                            <li><p>Provide a short description of the dataset in the large text area.</p></li>
+                            <li><p>Click on the “Browse” button below the description field to open your default file explorer.</p></li>
+                            <li><p>Select the file you would like to import.  Our site currently accepts .xlsx and .csv files.</p></li>
+                            <li><p>When you are ready, press the blue “Import” button to import the selected file.<p><br><img style="width:100%; height:100%; margin:-8px;" src="{% static 'assets/wiki/importing1.png' %}" alt="import page" /></p><p>This is a screenshot of the importing page</p></p></li>
+                            <li><p>This will bring you to a page with a list of the columns contained in this dataset in the left box.  Click on the titles of the columns you would like to import to move them to the right box.  You can also disselect columns you don't want by clicking on their titles in the right box.  When you are done, click the blue "next" button.<p><br><img style="width:100%; height:100%; margin:-8px;" src="{% static 'assets/wiki/column_selecting1.png' %}" alt="column selection page" /></p><p>This is a screenshot of column selection page</p></p></li>
+                            <li><p>You have now successfully imported your data!  You can now select this dataset for tagging or exporting.</p></li>
                         </ol>
                         <br>
                     </p>
                     <h3>Selecting a Dataset</h3>
                     <p>To select an imported dataset:
                         <ol>
-                            <li>Log in to your account if you are not already logged in.</li>
-                            <li>Go to your userpage.</li>
-                            <li>At the top should be your username with a list of all imported datasets below it.</li>
-                            <li>To select a dataset for use, click on its name in the list.  This will take you to the tagging page for this dataset.</li>                            
+                            <li><p><a href= {% url 'login' %}>Log in</a> to your account if you are not already logged in.</p></li>
+                            <li><p>Go to your userpage.</p></li>
+                            <li><p>At the top should be your username with a list of all imported datasets below it.</p></li>
+                            <li><p>To select a dataset for use, click on its name in the list.  This will take you to the tagging page for this dataset.<p><br><img style="width:100%; height:100%; margin:-8px;" src="{% static 'assets/wiki/userpage1.png' %}" alt="user page" /></p><p>This is a screenshot of the user page</p></p></li>                            
                         </ol>
                         <br>
                     </p>
                     <h3>Deleting a Dataset</h3>
                     <p>To remove an imported dataset from your account:
                         <ol>
-                            <li>Log in to your account if you are not already logged in.</li>
-                            <li>Go to your user page.</li>
-                            <li>Find the dataset you wish to remove from the list of imported datasets.</li>
-                            <li>Press the trashcan icon next to the dataset’s name to remove it from your account.</li>
+                            <li><p><a href= {% url 'login' %}>Log in</a> to your account if you are not already logged in.</p></li>
+                            <li><p>Go to your user page.</p></li>
+                            <li><p>Find the dataset you wish to remove from the list of imported datasets.</p></li>
+                            <li><p>Click on the "Delete dataset" button to the right of the dataset’s name to remove it from your account.</p></li>
                         </ol>
                         <br>
                     </p>
