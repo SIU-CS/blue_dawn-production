@@ -170,7 +170,7 @@
                                 {% for response in row %}
                                     <td>{{response.response}}</td>
                                 {% endfor %}
-                                <td id='data-{{row.0.rid}}' data-rid='{{row.0.rid}}' ondrop="drop(event)" ondragover="allowDrop(event)">
+                                <td style="width:200px" id='data-{{row.0.rid}}' data-rid='{{row.0.rid}}' ondrop="drop(event)" ondragover="allowDrop(event)">
                                     {% for tag in row.0.tags %}
                                         <span class="badge wordwrap tag" data-rid='{{row.0.rid}}' data-tag='{{tag}}'>{{tag}}<div onclick="removeItemTag($(this).parent())" class="glyphicon glyphicon-remove closeIcon"></div></span>
                                     {% endfor %}
