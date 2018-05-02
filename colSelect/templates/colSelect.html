@@ -30,6 +30,11 @@
 
             function saveCols() {
                 cols = $("#my-select").val();
+		if (cols.length == 0) {
+		    $("#my-select > option").each(function() {
+                        cols.push(this.value);
+		    });
+		}
                 var data = {
                     'csrfmiddlewaretoken': '{{csrf_token}}',
                     'cols': cols,
