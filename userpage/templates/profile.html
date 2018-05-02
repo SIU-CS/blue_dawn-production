@@ -27,10 +27,11 @@
                 $(".deletingbutton").mouseleave(function () { $(".deletebtn").hide(); }).mouseenter(function () { $(".deletebtn").show(); });
             });
 
-            function deleteDataSet(id) {
+            function deleteDataSet(event) {
                 if(event.stopPropagation) event.stopPropagation();
+                console.log(event.target.id);
                 var data = {
-                    'itemId': id,
+                    'itemId': event.target.id,
                     'csrfmiddlewaretoken': '{{csrf_token}}',
                 };
 
@@ -83,7 +84,7 @@
                             <td onclick="location.href='{% url 'viewdata' %}?dataset=' + id" id='data-{{item.id}}' class="deletingbutton">
                               {{item.name}}
                               <div class="deletebtn text-center" style="float:right;">
-                                  <button style="height:20px;width:120px;padding:1px;" id='{{item.id}}' onclick="deleteDataSet(this.id)" type="button" class="w3-btn w3-ripple w3-blue " >
+                                  <button style="height:20px;width:120px;padding:1px;" id='{{item.id}}' onclick="deleteDataSet(event)" type="button" class="w3-btn w3-ripple w3-blue " >
                                     Delete Dataset
                                   </button>
                               </div>
