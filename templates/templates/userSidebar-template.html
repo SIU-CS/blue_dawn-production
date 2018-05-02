@@ -11,18 +11,14 @@
     }
 
     function deleteData() {
-        event.cancelBubble = true;
-        if(event.stopPropagation) event.stopPropagation();
         $.confirm({
           title: 'Confirm Deleting!',
           content: 'Are you sure you want to delete this DataSet?',
           buttons: {
             confirm: function () {
                   location.replace("/tagging/DeleteDataSet?id={{id}}");
-                  $.alert('Confirmed!');
             },
             cancel: function () {
-                  $.alert('Canceled!');
             },
           }
         });
