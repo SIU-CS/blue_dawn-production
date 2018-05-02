@@ -22,6 +22,7 @@
               $('#userData').DataTable({
 		  "pageLength":1, 
                   "lengthMenu": [ [1], [1] ],
+                  "bLengthChange": false,
 		  "fnDrawCallback": function() {
 		      $(".tag").each(function(index, elem) {
 		          if ($("#" + $(elem).attr("data-tag")).length == 0) {
